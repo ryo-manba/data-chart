@@ -10,7 +10,8 @@ export function renderDonut(
 ): SVGSVGElement {
   const { svg, total } = renderSlices(data, colors, 54);
   if (!total) return svg;
-  const cx = 150,
+  const vb = svg.getAttribute("viewBox")?.split(" ").map(Number) ?? [0, 0, 300, 280];
+  const cx = vb[2]! / 2,
     cy = 120;
   const tc = getThemeColor("text"),
     tm = getThemeColor("textMuted");

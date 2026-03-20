@@ -7,9 +7,17 @@ export function renderSlices(
   colors: string[],
   inner: number,
 ): { svg: SVGSVGElement; values: number[]; total: number } {
-  const W = 300,
+  // Calculate width needed for legend
+  const sr0 = data.datasets[0];
+  const total0 = sr0 ? sr0.reduce((a, b) => a + Math.abs(b), 0) || 1 : 1;
+  let legendW = 20;
+  for (let i = 0; i < data.labels.length; i++) {
+    const lt = `${data.labels[i] ?? ""} (${Math.round((Math.abs(sr0?.[i] ?? 0) / total0) * 100)}%)`;
+    legendW += 14 + lt.length * 6.5 + 12;
+  }
+  const W = Math.max(300, legendW + 20),
     H = 280,
-    cx = 150,
+    cx = W / 2,
     cy = 120,
     r = 90;
   const svg = createSvg(W, H);

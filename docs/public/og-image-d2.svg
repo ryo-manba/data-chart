@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="50%" stop-color="#0f0f2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.7" cy="0.35" r="0.4">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.3" cy="0.7" r="0.3">
+      <stop offset="0%" stop-color="#172554" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <linearGradient id="dashBorder" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="0" y="0" width="1200" height="2" fill="#38bdf8" opacity="0.3"/>
+
+  <!-- ===== Right side: Two cards side by side ===== -->
+
+  <!-- Bar card -->
+  <g transform="translate(640, 70)" filter="url(#shadow)">
+    <rect x="0" y="0" width="240" height="240" rx="16" fill="#0a0a20" stroke="url(#dashBorder)" stroke-width="1.5"/>
+    <g transform="translate(120, 130) scale(2)">
+      <rect x="-45" y="-10" width="20" height="50" rx="3" fill="#7dd3fc"/>
+      <rect x="-20" y="-35" width="20" height="75" rx="3" fill="#38bdf8"/>
+      <rect x="5" y="-50" width="20" height="90" rx="3" fill="#0ea5e9"/>
+      <rect x="30" y="-25" width="20" height="65" rx="3" fill="#0284c7"/>
+    </g>
+  </g>
+
+  <!-- Pie & Donut card -->
+  <g transform="translate(910, 70)" filter="url(#shadow)">
+    <rect x="0" y="0" width="240" height="240" rx="16" fill="#0a0a20" stroke="url(#dashBorder)" stroke-width="1.5"/>
+    <!-- Pie -->
+    <g transform="translate(80, 105) scale(1.3)">
+      <circle cx="0" cy="0" r="30" fill="#0369a1"/>
+      <path d="M0,0 L0,-30 A30,30 0 0,1 25.98,-15 Z" fill="#0ea5e9"/>
+      <path d="M0,0 L25.98,-15 A30,30 0 0,1 25.98,15 Z" fill="#38bdf8"/>
+      <path d="M0,0 L25.98,15 A30,30 0 0,1 0,30 Z" fill="#7dd3fc"/>
+    </g>
+    <!-- Donut -->
+    <g transform="translate(175, 145) scale(0.9)">
+      <circle cx="0" cy="0" r="28" stroke="#0369a1" stroke-width="10" fill="none"/>
+      <circle cx="0" cy="0" r="28" stroke="#0ea5e9" stroke-width="10" fill="none"
+        stroke-dasharray="44 132" stroke-dashoffset="0"/>
+      <circle cx="0" cy="0" r="28" stroke="#38bdf8" stroke-width="10" fill="none"
+        stroke-dasharray="55 121" stroke-dashoffset="-44"/>
+      <circle cx="0" cy="0" r="28" stroke="#7dd3fc" stroke-width="10" fill="none"
+        stroke-dasharray="33 143" stroke-dashoffset="-99"/>
+    </g>
+  </g>
+
+  <!-- Line card (smaller, below) -->
+  <g transform="translate(720, 340)" filter="url(#shadow)">
+    <rect x="0" y="0" width="340" height="200" rx="16" fill="#0a0a20" stroke="url(#dashBorder)" stroke-width="1.5"/>
+    <g transform="translate(30, 30) scale(2)">
+      <polyline points="10,55 35,35 60,42 85,15 110,22" stroke="#0ea5e9" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="10" cy="55" r="3.5" fill="#0ea5e9"/>
+      <circle cx="35" cy="35" r="3.5" fill="#38bdf8"/>
+      <circle cx="60" cy="42" r="3.5" fill="#0ea5e9"/>
+      <circle cx="85" cy="15" r="3.5" fill="#38bdf8"/>
+      <circle cx="110" cy="22" r="3.5" fill="#0ea5e9"/>
+    </g>
+  </g>
+
+  <!-- Floating dots -->
+  <circle cx="620" cy="200" r="2" fill="#22d3ee" opacity="0.2"/>
+  <circle cx="1170" cy="420" r="2" fill="#a78bfa" opacity="0.15"/>
+
+  <!-- ===== Text Content (left side) ===== -->
+  <text x="80" y="250" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="800" fill="#7dd3fc" letter-spacing="-1">data-chart</text>
+  <text x="80" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="400" fill="#e2e8f0" opacity="0.9">Chart your tables. No JavaScript to write.</text>
+  <g transform="translate(80, 360)">
+    <g>
+      <rect x="0" y="0" width="108" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="54" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Under 6KB</text>
+    </g>
+    <g transform="translate(120, 0)">
+      <rect x="0" y="0" width="116" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="58" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Zero Config</text>
+    </g>
+    <g transform="translate(248, 0)">
+      <rect x="0" y="0" width="146" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="73" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">No Dependencies</text>
+    </g>
+    <g transform="translate(406, 0)">
+      <rect x="0" y="0" width="112" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="56" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">TypeScript</text>
+    </g>
+  </g>
+</svg>

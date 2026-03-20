@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="50%" stop-color="#0f0f2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.7" cy="0.35" r="0.4">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.3" cy="0.7" r="0.3">
+      <stop offset="0%" stop-color="#172554" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+    </pattern>
+    <filter id="glowDot" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <!-- Bar gradients -->
+    <linearGradient id="b1" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="b2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="b3" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6d28d9" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="b4" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#67e8f9"/>
+    </linearGradient>
+    <linearGradient id="b5" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+    <!-- Line -->
+    <linearGradient id="lineP" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <!-- Donut colors -->
+    <linearGradient id="d1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="d2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="d3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="d4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="0" y="0" width="1200" height="2" fill="#38bdf8" opacity="0.3"/>
+
+  <!-- ===== Right side: Free-floating charts without cards ===== -->
+
+  <!-- Background glow behind chart area -->
+  <circle cx="900" cy="300" r="200" fill="#38bdf8" opacity="0.02" filter="url(#softGlow)"/>
+
+  <!-- Bar chart - no card, floating directly -->
+  <g transform="translate(680, 80)">
+    <!-- Subtle axis -->
+    <line x1="0" y1="280" x2="250" y2="280" stroke="#38bdf8" stroke-opacity="0.1" stroke-width="1"/>
+    <!-- Bars with rounded tops, spaced out -->
+    <rect x="5" y="160" width="22" height="120" rx="4" fill="url(#b1)"/>
+    <rect x="35" y="100" width="22" height="180" rx="4" fill="url(#b2)"/>
+    <rect x="65" y="50" width="22" height="230" rx="4" fill="url(#b3)"/>
+    <rect x="95" y="120" width="22" height="160" rx="4" fill="url(#b4)"/>
+    <rect x="125" y="80" width="22" height="200" rx="4" fill="url(#b1)"/>
+    <rect x="155" y="30" width="22" height="250" rx="4" fill="url(#b2)"/>
+    <rect x="185" y="70" width="22" height="210" rx="4" fill="url(#b5)"/>
+    <rect x="215" y="140" width="22" height="140" rx="4" fill="url(#b3)"/>
+
+    <!-- Trend line overlaying bars -->
+    <path d="M 16 155 C 50 95, 76 45, 106 115 C 136 75, 166 25, 196 65 C 216 100, 226 135, 226 135" fill="none" stroke="url(#lineP)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- Glow dots on trend line -->
+    <circle cx="16" cy="155" r="4" fill="#f472b6" filter="url(#glowDot)"/>
+    <circle cx="76" cy="45" r="4" fill="#f97316" filter="url(#glowDot)" opacity="0.8"/>
+    <circle cx="166" cy="25" r="4" fill="#fb923c" filter="url(#glowDot)"/>
+  </g>
+
+  <!-- Donut chart - floating -->
+  <g transform="translate(1040, 340)">
+    <!-- Subtle background ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#1e293b" stroke-width="20"/>
+    <!-- Segments -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#d1)" stroke-width="20" stroke-dasharray="140 363" stroke-dashoffset="0" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#d2)" stroke-width="20" stroke-dasharray="100 403" stroke-dashoffset="-150" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#d3)" stroke-width="20" stroke-dasharray="70 433" stroke-dashoffset="-260" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#d4)" stroke-width="20" stroke-dasharray="60 443" stroke-dashoffset="-340" stroke-linecap="round"/>
+    <!-- Center text -->
+    <text x="0" y="-5" font-family="-apple-system, sans-serif" font-size="22" font-weight="700" fill="#f1f5f9" text-anchor="middle">73%</text>
+    <text x="0" y="15" font-family="-apple-system, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">conversion</text>
+  </g>
+
+  <!-- Connecting particles / constellation lines -->
+  <g stroke="#38bdf8" stroke-opacity="0.08" stroke-width="1">
+    <line x1="920" y1="310" x2="960" y2="340"/>
+    <line x1="930" y1="350" x2="965" y2="355"/>
+  </g>
+
+  <!-- Floating dots -->
+  <circle cx="650" cy="150" r="2" fill="#22d3ee" opacity="0.3"/>
+  <circle cx="670" cy="430" r="2.5" fill="#a78bfa" opacity="0.2"/>
+  <circle cx="1160" cy="200" r="2" fill="#f472b6" opacity="0.2"/>
+  <circle cx="1140" cy="500" r="1.5" fill="#34d399" opacity="0.25"/>
+  <circle cx="950" cy="100" r="2" fill="#60a5fa" opacity="0.15"/>
+  <circle cx="980" cy="550" r="2" fill="#fbbf24" opacity="0.15"/>
+
+  <!-- ===== Text Content (left side) ===== -->
+  <text x="80" y="250" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="800" fill="#7dd3fc" letter-spacing="-1">data-chart</text>
+  <text x="80" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="400" fill="#e2e8f0" opacity="0.9">Chart your tables. No JavaScript to write.</text>
+  <g transform="translate(80, 360)">
+    <g>
+      <rect x="0" y="0" width="108" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="54" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Under 6KB</text>
+    </g>
+    <g transform="translate(120, 0)">
+      <rect x="0" y="0" width="116" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="58" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Zero Config</text>
+    </g>
+    <g transform="translate(248, 0)">
+      <rect x="0" y="0" width="146" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="73" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">No Dependencies</text>
+    </g>
+    <g transform="translate(406, 0)">
+      <rect x="0" y="0" width="112" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+      <text x="56" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">TypeScript</text>
+    </g>
+  </g>
+</svg>

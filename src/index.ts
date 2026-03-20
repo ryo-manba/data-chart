@@ -120,8 +120,13 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
 
   // Pie/Donut slices
   if (slices.length > 0) {
-    const cx = cfg.type === "pie" || cfg.type === "donut" ? "150px" : "50%";
-    const cy = cfg.type === "pie" || cfg.type === "donut" ? "120px" : "50%";
+    let cx = "50%",
+      cy = "50%";
+    if (cfg.type === "pie" || cfg.type === "donut") {
+      const vb = svg.getAttribute("viewBox")?.split(" ").map(Number);
+      cx = vb ? `${vb[2]! / 2}px` : "50%";
+      cy = "120px";
+    }
     slices.forEach((el, i) => {
       const s = el as SVGElement;
       s.style.transformOrigin = `${cx} ${cy}`;

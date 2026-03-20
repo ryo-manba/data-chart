@@ -56,9 +56,14 @@ import Footer from "../components/Footer.astro";
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Bar chart example -->
         <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3">
             <h3 class="text-sm font-heading font-semibold">Bar Chart</h3>
-            <code class="chart-tag">data-chart="bar"</code>
+            <div class="flex items-center gap-3">
+              <button type="button" class="demo-replay" aria-label="Replay animation">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+              </button>
+              <code class="chart-tag">data-chart="bar"</code>
+            </div>
           </div>
           <div class="chart-demo chart-demo--cartesian">
             <table data-chart="bar" data-chart-animate>
@@ -76,9 +81,14 @@ import Footer from "../components/Footer.astro";
 
         <!-- Line chart example -->
         <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3">
             <h3 class="text-sm font-heading font-semibold">Line Chart</h3>
-            <code class="chart-tag">data-chart="line"</code>
+            <div class="flex items-center gap-3">
+              <button type="button" class="demo-replay" aria-label="Replay animation">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+              </button>
+              <code class="chart-tag">data-chart="line"</code>
+            </div>
           </div>
           <div class="chart-demo chart-demo--cartesian">
             <table data-chart="line" data-chart-animate>
@@ -97,9 +107,14 @@ import Footer from "../components/Footer.astro";
 
         <!-- Pie chart example -->
         <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3">
             <h3 class="text-sm font-heading font-semibold">Pie Chart</h3>
-            <code class="chart-tag">data-chart="pie"</code>
+            <div class="flex items-center gap-3">
+              <button type="button" class="demo-replay" aria-label="Replay animation">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+              </button>
+              <code class="chart-tag">data-chart="pie"</code>
+            </div>
           </div>
           <div class="chart-demo chart-demo--radial">
             <table data-chart="pie" data-chart-animate>
@@ -116,9 +131,14 @@ import Footer from "../components/Footer.astro";
 
         <!-- Donut chart example -->
         <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3">
             <h3 class="text-sm font-heading font-semibold">Donut Chart</h3>
-            <code class="chart-tag">data-chart="donut"</code>
+            <div class="flex items-center gap-3">
+              <button type="button" class="demo-replay" aria-label="Replay animation">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+              </button>
+              <code class="chart-tag">data-chart="donut"</code>
+            </div>
           </div>
           <div class="chart-demo chart-demo--radial">
             <table data-chart="donut" data-chart-animate>
@@ -346,7 +366,17 @@ import Footer from "../components/Footer.astro";
   <Footer />
 
   <script>
-    import '../../../src/index.ts';
+    import dataChart from '../../../src/index.ts';
+
+    // Replay animation on button click for Live Demo cards
+    document.querySelectorAll('.demo-replay').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.glass-card');
+        if (!card) return;
+        const table = card.querySelector('table[data-chart]') as HTMLTableElement | null;
+        if (table) dataChart.refresh(table);
+      });
+    });
   </script>
 </Layout>
 
@@ -419,6 +449,24 @@ import Footer from "../components/Footer.astro";
   .chart-showcase-card:hover .chart-tag {
     background: rgba(56, 189, 248, 0.1);
     color: var(--color-accent-readable);
+  }
+
+  .demo-replay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .demo-replay:hover {
+    color: var(--color-accent-readable);
+    border-color: var(--color-accent-readable);
   }
 
   /* Reserve space for charts before JS renders them (prevents layout shift) */

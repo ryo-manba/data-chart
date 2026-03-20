@@ -38,7 +38,7 @@ import Footer from "../components/Footer.astro";
                 Replay
               </button>
             </div>
-            <div id="chart-preview" class="min-h-[300px] flex items-center justify-center">
+            <div id="chart-preview" class="min-h-[300px]">
               <table id="playground-table" data-chart="bar" data-chart-grid="y" data-chart-legend="top" data-chart-radius="3">
                 <thead>
                   <tr>
@@ -203,17 +203,6 @@ import Footer from "../components/Footer.astro";
               <button type="button" class="w-8 h-8 rounded-full border-2 border-transparent hover:border-white/50 transition-colors cursor-pointer" style="background:#4a90d9" data-color="#4a90d9" aria-label="Color #4a90d9"></button>
             </div>
           </div>
-
-          <!-- Table Data card -->
-          <div class="glass-card p-6">
-            <h2 class="text-sm font-heading font-bold text-text mb-3">Table Data</h2>
-            <textarea
-              id="data-textarea"
-              rows="12"
-              class="w-full bg-code-bg border border-border rounded-lg p-4 text-sm text-text-secondary font-mono leading-relaxed resize-y focus:outline-none focus:border-accent transition-colors"
-              spellcheck="false"
-            ></textarea>
-          </div>
         </div>
       </div>
     </section>
@@ -269,20 +258,6 @@ import Footer from "../components/Footer.astro";
   <script>
     import dataChart from '../../../src/index.ts';
 
-    const DEFAULT_TABLE_HTML = `<thead>
-  <tr>
-    <th>Month</th>
-    <th>Revenue</th>
-    <th>Expenses</th>
-  </tr>
-</thead>
-<tbody>
-  <tr><td>Jan</td><td>120</td><td>80</td></tr>
-  <tr><td>Feb</td><td>150</td><td>95</td></tr>
-  <tr><td>Mar</td><td>180</td><td>110</td></tr>
-  <tr><td>Apr</td><td>210</td><td>130</td></tr>
-</tbody>`;
-
     const DEFAULTS = {
       chartType: 'bar',
       grid: 'y',
@@ -296,7 +271,6 @@ import Footer from "../components/Footer.astro";
 
     const table = document.getElementById('playground-table') as HTMLTableElement;
     const codeEl = document.getElementById('generated-code') as HTMLElement;
-    const textarea = document.getElementById('data-textarea') as HTMLTextAreaElement;
     const radiusInput = document.getElementById('radius-input') as HTMLInputElement;
     const radiusValue = document.getElementById('radius-value') as HTMLSpanElement;
     const stackedInput = document.getElementById('stacked-input') as HTMLInputElement;
@@ -318,7 +292,6 @@ import Footer from "../components/Footer.astro";
     let currentAnimate = DEFAULTS.animate;
     let currentDuration = DEFAULTS.duration;
     let currentStagger = DEFAULTS.stagger;
-    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
     function setActivePill(group: string, value: string): void {
       const buttons = document.querySelectorAll<HTMLButtonElement>(`.pill-btn[data-group="${group}"]`);
@@ -418,7 +391,8 @@ import Footer from "../components/Footer.astro";
         if (currentStagger !== 60) attrs += ` data-chart-animate-stagger="${currentStagger}"`;
       }
 
-      const raw = `<table ${attrs}>\n${table.innerHTML.trim()}\n</table>`;
+      const clean = table.innerHTML.trim().replace(/\s*data-astro-[\w-]+="[^"]*"/g, '');
+      const raw = `<table ${attrs}>\n${clean}\n</table>`;
       return formatHTML(raw);
     }
 
@@ -484,18 +458,6 @@ import Footer from "../components/Footer.astro";
       updateChart();
     });
 
-    // Textarea with debounce
-    textarea.addEventListener('input', () => {
-      if (debounceTimer) clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        const value = textarea.value.trim();
-        if (value) {
-          table.innerHTML = value;
-          updateChart();
-        }
-      }, 400);
-    });
-
     // Replay button
     replayBtn.addEventListener('click', () => {
       dataChart.refresh(table);
@@ -536,7 +498,6 @@ import Footer from "../components/Footer.astro";
     }
 
     // --- Initialize ---
-    textarea.value = DEFAULT_TABLE_HTML;
     updateStackedState();
     updateAnimationControls();
     setTimeout(() => {
