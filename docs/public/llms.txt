@@ -1,0 +1,141 @@
+# data-chart
+
+> Chart your tables. No JavaScript to write. A zero-dependency library that converts HTML `<table>` elements into SVG charts using data attributes.
+
+## Quick Start
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/data-chart@0/dist/data-chart.js"></script>
+
+<table data-chart="bar">
+  <thead><tr><th></th><th>Sales</th></tr></thead>
+  <tbody>
+    <tr><th>Jan</th><td>120</td></tr>
+    <tr><th>Feb</th><td>200</td></tr>
+    <tr><th>Mar</th><td>150</td></tr>
+  </tbody>
+</table>
+```
+
+No `init()`. No config objects. Just a `<table>` with `data-chart`.
+
+## Core Concept
+
+Add a `data-chart` attribute to any HTML `<table>`. The library auto-initializes on DOMContentLoaded, parses the table data, and renders an SVG chart. MutationObserver handles dynamically added tables (SPA support).
+
+## Chart Types (5)
+
+- **bar** — Vertical bar chart (supports `data-chart-horizontal` and `data-chart-stacked`)
+- **line** — Line chart with data point dots
+- **area** — Area chart with filled region
+- **pie** — Pie chart
+- **donut** — Donut chart with center total
+
+## Data Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-chart` | string | (required) | Chart type: bar, line, area, pie, donut |
+| `data-chart-height` | number | 220 | Chart height in px |
+| `data-chart-colors` | string | auto | Comma-separated hex colors |
+| `data-chart-grid` | string | "y" | Grid lines: y, x, both, none |
+| `data-chart-legend` | string | auto | Legend position: top, bottom, none (auto: top if 2+ series) |
+| `data-chart-radius` | number | 3 | Bar corner radius in px |
+| `data-chart-horizontal` | boolean | — | Horizontal bar chart (bar only) |
+| `data-chart-stacked` | boolean | — | Stacked bar chart (bar only) |
+| `data-chart-animate` | boolean | — | Enable entrance animations |
+| `data-chart-animate-duration` | number | 600 | Animation duration in ms |
+| `data-chart-animate-stagger` | number | 60 | Stagger delay between elements in ms |
+
+## Table Structure
+
+```html
+<table data-chart="bar">
+  <caption>Optional title</caption>
+  <thead>
+    <tr><th></th><th>Series A</th><th>Series B</th></tr>
+  </thead>
+  <tbody>
+    <tr><th>Label 1</th><td>100</td><td>80</td></tr>
+    <tr><th>Label 2</th><td>200</td><td>150</td></tr>
+  </tbody>
+</table>
+```
+
+- First `<th>` in thead is ignored (category column header)
+- Remaining `<th>` cells = series names
+- First cell in each tbody row = category label
+- Remaining cells = numeric values
+- `<caption>` = chart title (used for `aria-label`)
+
+## Value Parsing
+
+Automatically strips: `¥`, `$`, `€`, `£`, `₩` (leading), `%` (trailing), commas. Negative values supported.
+
+## Dark Mode
+
+Automatically adapts to `prefers-color-scheme: dark`. No configuration needed.
+
+## Default Color Palette
+
+`#2d5be3`, `#1a8c5a`, `#d94e3f`, `#c78a1e`, `#6b4ed4`, `#1a8c8c`, `#e05898`, `#4a90d9`
+
+## JavaScript API
+
+```js
+window.dataChart.init()          // Initialize (auto-called)
+window.dataChart.render(table)   // Render a single table
+window.dataChart.refresh(table)  // Re-render (destroy & recreate)
+window.dataChart.destroy(table?) // Remove chart(s)
+window.dataChart.version         // Library version
+```
+
+## Events
+
+- `datachart:rendered` — Fired after SVG rendered (`detail: { svg, data }`)
+- `datachart:error` — Fired on error (`detail: { message }`)
+- `datachart:destroyed` — Fired when chart removed
+
+## Installation
+
+**CDN:**
+```html
+<script src="https://cdn.jsdelivr.net/npm/data-chart@0/dist/data-chart.js"></script>
+```
+
+**npm:**
+```bash
+npm install data-chart
+```
+
+```js
+import 'data-chart'; // auto-initializes
+```
+
+## Common Patterns
+
+**Multi-series bar chart:**
+```html
+<table data-chart="bar" data-chart-animate>
+  <thead><tr><th></th><th>2024</th><th>2025</th></tr></thead>
+  <tbody>
+    <tr><th>Q1</th><td>300</td><td>450</td></tr>
+    <tr><th>Q2</th><td>400</td><td>500</td></tr>
+  </tbody>
+</table>
+```
+
+**Horizontal stacked bar:**
+```html
+<table data-chart="bar" data-chart-horizontal data-chart-stacked>...</table>
+```
+
+**Pie chart with custom colors:**
+```html
+<table data-chart="pie" data-chart-colors="#ff6384,#36a2eb,#ffce56">...</table>
+```
+
+**Line chart without grid:**
+```html
+<table data-chart="line" data-chart-grid="none" data-chart-height="300">...</table>
+```

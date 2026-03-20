@@ -1,0 +1,405 @@
+# data-chart — Full API Reference for AI Assistants
+
+> This document provides exhaustive detail for AI assistants generating HTML with data-chart. data-chart is a zero-dependency library that converts HTML `<table>` elements into SVG charts using only data attributes.
+
+## Overview
+
+data-chart works as follows:
+
+1. User includes a `<script>` tag and writes standard HTML `<table>` elements with `data-chart` attributes
+2. On DOMContentLoaded, the library scans for `table[data-chart]` elements
+3. Each table is parsed: thead → series names, tbody → categories and values
+4. An SVG chart is rendered and inserted after the table
+5. The table is hidden (accessible via screen readers)
+6. MutationObserver watches for dynamically added tables
+
+No JavaScript configuration objects. No `init()` call. No build step.
+
+---
+
+## Complete Attribute Reference
+
+### `data-chart` (REQUIRED)
+
+The chart type to render. Must be one of the 5 built-in types.
+
+**Values:** `bar`, `line`, `area`, `pie`, `donut`
+
+```html
+<table data-chart="bar">...</table>
+<table data-chart="line">...</table>
+<table data-chart="area">...</table>
+<table data-chart="pie">...</table>
+<table data-chart="donut">...</table>
+```
+
+### `data-chart-height`
+
+Chart height in pixels.
+
+**Default:** `220`
+**Example:** `data-chart-height="300"` → 300px tall chart
+
+### `data-chart-colors`
+
+Custom color palette as comma-separated hex values. If fewer colors than series/slices, the default palette fills in.
+
+**Default palette:** `#2d5be3`, `#1a8c5a`, `#d94e3f`, `#c78a1e`, `#6b4ed4`, `#1a8c8c`, `#e05898`, `#4a90d9`
+
+```html
+<table data-chart="pie" data-chart-colors="#ff6384,#36a2eb,#ffce56">...</table>
+```
+
+### `data-chart-grid`
+
+Grid line direction.
+
+**Default:** `y`
+**Values:**
+- `y` — Horizontal grid lines only
+- `x` — Vertical grid lines only
+- `both` — Both directions
+- `none` — No grid lines
+
+**Note:** Grid lines are not rendered for pie/donut charts.
+
+### `data-chart-legend`
+
+Legend position.
+
+**Default:** Auto — `top` if 2+ series, `none` if single series
+**Values:**
+- `top` — Legend above chart
+- `bottom` — Legend below chart
+- `none` — No legend
+
+For pie/donut charts, legend shows slice labels with percentages.
+
+### `data-chart-radius`
+
+Corner radius for bar chart rectangles in pixels.
+
+**Default:** `3`
+**Example:** `data-chart-radius="0"` → sharp corners
+
+### `data-chart-horizontal`
+
+Boolean attribute (no value needed). Renders bar chart horizontally.
+
+**Applies to:** `bar` type only
+
+```html
+<table data-chart="bar" data-chart-horizontal>...</table>
+```
+
+### `data-chart-stacked`
+
+Boolean attribute. Renders bar chart with stacked series.
+
+**Applies to:** `bar` type only
+
+```html
+<table data-chart="bar" data-chart-stacked>...</table>
+```
+
+**Can combine with horizontal:**
+```html
+<table data-chart="bar" data-chart-horizontal data-chart-stacked>...</table>
+```
+
+### `data-chart-animate`
+
+Boolean attribute. Enables entrance animations.
+
+**Default behavior without `animate`:** Chart renders instantly.
+
+**With `animate`:**
+- Bars: Height/width grows from 0
+- Lines: Stroke draws left-to-right
+- Dots: Fade in after line draws
+- Areas: Opacity fades in after line
+- Pie/Donut slices: Scale from center
+
+Automatically respects `prefers-reduced-motion: reduce`.
+
+### `data-chart-animate-duration`
+
+Animation duration per element in milliseconds.
+
+**Default:** `600`
+**Example:** `data-chart-animate-duration="1000"` → 1 second
+
+### `data-chart-animate-stagger`
+
+Stagger delay between animated elements in milliseconds.
+
+**Default:** `60`
+**Example:** `data-chart-animate-stagger="100"` → 100ms between each bar/slice
+
+---
+
+## Table Data Format
+
+### Basic Structure
+
+```html
+<table data-chart="bar">
+  <caption>Chart Title</caption>
+  <thead>
+    <tr>
+      <th></th>           <!-- Ignored (category column header) -->
+      <th>Series A</th>   <!-- Series name -->
+      <th>Series B</th>   <!-- Series name -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Jan</th>        <!-- Category label -->
+      <td>100</td>        <!-- Value for Series A -->
+      <td>80</td>         <!-- Value for Series B -->
+    </tr>
+    <tr>
+      <th>Feb</th>
+      <td>200</td>
+      <td>150</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Rules
+
+- `<tbody>` is required. Without it, the library throws `NO_DATA`.
+- `<thead>` is optional. If absent, the first `<tbody>` row is used as header.
+- `<caption>` is optional. Used as `aria-label` for the SVG.
+- First cell in thead row is always ignored (it's the category column header).
+- First cell in each tbody row is the category label.
+- Remaining cells are numeric values.
+
+### Value Parsing
+
+The parser automatically handles formatted numbers:
+
+| Input | Parsed As |
+|-------|-----------|
+| `100` | 100 |
+| `1,234` | 1234 |
+| `$99.99` | 99.99 |
+| `¥1,200` | 1200 |
+| `€50` | 50 |
+| `£30` | 30 |
+| `₩5000` | 5000 |
+| `85%` | 85 |
+| `-42` | -42 |
+| `abc` | 0 |
+
+Supported currency symbols (stripped from leading position): `¥`, `$`, `€`, `£`, `₩`
+
+### Single Series vs Multi-Series
+
+**Single series** (1 data column): No legend shown by default. For pie/donut, each row becomes a slice.
+
+```html
+<table data-chart="pie">
+  <thead><tr><th></th><th>Share</th></tr></thead>
+  <tbody>
+    <tr><th>Chrome</th><td>65</td></tr>
+    <tr><th>Firefox</th><td>15</td></tr>
+    <tr><th>Safari</th><td>12</td></tr>
+  </tbody>
+</table>
+```
+
+**Multi-series** (2+ data columns): Legend shown at top by default. Each column is a separate series.
+
+```html
+<table data-chart="bar">
+  <thead><tr><th></th><th>2024</th><th>2025</th></tr></thead>
+  <tbody>
+    <tr><th>Q1</th><td>300</td><td>450</td></tr>
+    <tr><th>Q2</th><td>400</td><td>500</td></tr>
+  </tbody>
+</table>
+```
+
+---
+
+## Chart Type Details
+
+### Bar Chart (`data-chart="bar"`)
+
+- Default: vertical bars, grouped by category
+- `data-chart-horizontal`: flips to horizontal bars
+- `data-chart-stacked`: stacks series on top of each other
+- `data-chart-radius`: controls corner rounding (default 3px)
+- Supports negative values
+- Grid defaults to `y` (horizontal lines)
+
+### Line Chart (`data-chart="line"`)
+
+- Renders connected line paths with data point dots
+- Each series is a separate line
+- Dots are rendered at each data point
+- Grid defaults to `y`
+
+### Area Chart (`data-chart="area"`)
+
+- Like line chart but with filled region below the line
+- Area fill uses reduced opacity
+- Line is rendered on top of the fill
+- Grid defaults to `y`
+
+### Pie Chart (`data-chart="pie"`)
+
+- Circular chart with slices
+- Uses first series data only (single column)
+- Each row = one slice, sized by proportion
+- Legend shows label + percentage
+- No grid or axis labels
+- Category labels from first column of tbody
+
+### Donut Chart (`data-chart="donut"`)
+
+- Same as pie but with center hole
+- Displays total value in center
+- Same data rules as pie
+
+---
+
+## Animation Details
+
+When `data-chart-animate` is set:
+
+| Element | Animation | Duration | Notes |
+|---------|-----------|----------|-------|
+| Bars (vertical) | Height grows from 0, y position adjusts | `animDuration` | Staggered per bar |
+| Bars (horizontal) | Width grows from 0 | `animDuration` | Staggered per bar |
+| Bars (stacked) | Each segment grows sequentially per column | `animDuration / 2` per segment | Column-then-segment order |
+| Lines | Stroke draws left-to-right via dashoffset | `animDuration × 1.6` | No stagger |
+| Dots | Fade in | 300ms | After line completes, staggered |
+| Areas | Opacity fade in | 800ms | 400ms delay after line |
+| Slices (pie/donut) | Scale from 0.3 to 1 + fade in | `animDuration` | Staggered per slice |
+
+All animations disabled when `prefers-reduced-motion: reduce` is active.
+
+---
+
+## Theming
+
+### Automatic Dark Mode
+
+The library detects `prefers-color-scheme: dark` and adjusts colors:
+
+| Property | Light | Dark |
+|----------|-------|------|
+| Text | `#4a4a44` | `#c8c8c0` |
+| Muted text | `#8a8a80` | `#9a9a90` |
+| Grid lines | `#e6e5df` | `#2c2c28` |
+| Background | `#ffffff` | `#1a1a18` |
+
+### CSS Custom Properties
+
+- `--dc-font-family` — Font for labels and legends (default: `system-ui, -apple-system, sans-serif`)
+
+### CSS Classes
+
+| Class | Element |
+|-------|---------|
+| `.data-chart-container` | Wrapper div (table + SVG) |
+| `.data-chart-svg` | The SVG element |
+| `.data-chart-rendered` | Applied to converted tables |
+| `.data-chart-grid` | Grid lines group |
+| `.data-chart-axis` | Axis labels group |
+| `.data-chart-series` | Series data group |
+| `.data-chart-legend` | Legend group |
+| `.data-chart-bar` | Individual bar rect |
+| `.data-chart-line` | Line path |
+| `.data-chart-area` | Area fill path |
+| `.data-chart-dot` | Data point circle |
+| `.data-chart-slice` | Pie/donut slice path |
+
+---
+
+## JavaScript API
+
+```js
+window.dataChart.init()          // Scan & render all table[data-chart]
+window.dataChart.render(table)   // Render a single table element
+window.dataChart.refresh(table)  // Destroy & re-render
+window.dataChart.destroy(table?) // Remove chart(s), no arg = remove all
+window.dataChart.version         // "0.1.0"
+```
+
+### Events
+
+Dispatched on the `<table>` element:
+
+```js
+table.addEventListener('datachart:rendered', (e) => {
+  console.log(e.detail.svg);  // SVGSVGElement
+  console.log(e.detail.data); // ParsedData
+});
+
+table.addEventListener('datachart:error', (e) => {
+  console.log(e.detail.message); // Error message
+});
+
+table.addEventListener('datachart:destroyed', () => {
+  console.log('Chart removed');
+});
+```
+
+### TypeScript Exports
+
+```typescript
+import type { DataChartType, DataChartGrid, DataChartLegend, DataChartAttributes } from 'data-chart';
+import type { ParsedData, ChartType, ChartConfig, DataChartAPI } from 'data-chart';
+```
+
+`DataChartAttributes` extends React's `HTMLAttributes` for JSX autocomplete.
+
+---
+
+## Accessibility
+
+- SVG gets `role="img"` and `aria-label` (from `<caption>` or auto-generated)
+- Source table gets `aria-hidden="true"` (data is in the SVG)
+- Table remains in DOM for screen readers and no-JS fallback
+- Animations respect `prefers-reduced-motion: reduce`
+
+## data-anim Integration
+
+`data-anim-*` attributes on the table are forwarded to `.data-chart-container` for the data-anim animation library to process. data-anim is completely optional.
+
+```html
+<table data-chart="bar" data-anim="fadeInUp" data-anim-trigger="scroll">
+  ...
+</table>
+```
+
+## Anti-FOUC
+
+An optional CSS file prevents flash of unstyled table content:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/data-chart@0/dist/data-chart.css">
+```
+
+Or inline:
+```css
+table[data-chart] { visibility: hidden; position: absolute; width: 0; height: 0; overflow: hidden; }
+```
+
+---
+
+## Best Practices for AI-Generated HTML
+
+1. **Always include `<thead>`** for explicit series names
+2. **Use `<caption>`** for descriptive chart titles
+3. **Use `data-chart-animate`** for visual appeal on content pages
+4. **Use `data-chart-colors`** to match brand colors
+5. **Keep tables under 20 rows** for readable charts
+6. **Use `data-chart-horizontal`** when category labels are long
+7. **Use `data-chart-stacked`** to show part-of-whole relationships in bar charts
+8. **Use `pie` or `donut`** only for showing proportions (keep slices under 7)
+9. **Ensure table works without JS** — progressive enhancement is the core principle
