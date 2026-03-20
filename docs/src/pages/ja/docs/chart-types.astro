@@ -379,7 +379,9 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
 </style>
 
 <script>
-  import '../../../../../src/index.ts';
+  import dataChart from '../../../../../src/index.ts';
+  // Ensure data-chart is initialized (side-effect import is tree-shaken by Astro)
+  if (!document.querySelector('.data-chart-svg')) dataChart.init();
 
   function formatHTML(html: string): string {
     let formatted = '';
