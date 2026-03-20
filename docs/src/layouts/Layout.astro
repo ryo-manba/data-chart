@@ -5,8 +5,11 @@ interface Props {
   lang?: string;
 }
 
-const defaultDesc = 'Convert HTML tables into SVG charts. No JavaScript to write. Under 7KB.';
-const { title, description = defaultDesc, lang = 'en' } = Astro.props;
+const isJa = Astro.url.pathname.startsWith('/data-chart/ja/') || Astro.url.pathname.startsWith('/ja/');
+const defaultDesc = isJa
+  ? 'HTMLテーブルをSVGチャートに変換。JavaScriptを書く必要なし。7KB未満。'
+  : 'Convert HTML tables into SVG charts. No JavaScript to write. Under 7KB.';
+const { title, description = defaultDesc, lang = isJa ? 'ja' : 'en' } = Astro.props;
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
 ---
 
