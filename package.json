@@ -47,6 +47,7 @@
     "type": "git",
     "url": "https://github.com/ryo-manba/data-chart.git"
   },
+  "funding": "https://github.com/ryo-manba/data-chart?sponsor=1",
   "homepage": "https://ryo-manba.github.io/data-chart/",
   "bugs": {
     "url": "https://github.com/ryo-manba/data-chart/issues"
