@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro + data-chart</title>
-    <script src="https://unpkg.com/data-chart@latest/dist/data-chart.js"></script>
     <style is:global>
-      body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+      body { opacity: 0; font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+      body.ready { opacity: 1; transition: opacity 0.15s; }
     </style>
   </head>
   <body>
     <slot />
+    <script>
+      import 'data-chart';
+      document.body.classList.add('ready');
+    </script>
   </body>
 </html>

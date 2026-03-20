@@ -6,3 +6,11 @@ docs/.astro/
 *.tsbuildinfo
 .DS_Store
 specs/
+
+# examples
+examples/**/package-lock.json
+examples/**/.astro/
+examples/**/.next/
+examples/**/.nuxt/
+examples/**/.output/
+examples/**/next-env.d.ts

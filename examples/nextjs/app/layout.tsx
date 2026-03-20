@@ -12,6 +12,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: 'body{opacity:0}body.ready{opacity:1;transition:opacity .15s}' }} />
+      </head>
       <body>
         <DataChart />
         {children}

@@ -4,30 +4,86 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
   <h1>Astro + data-chart</h1>
 
-  <table data-chart="line" data-chart-grid="both">
-    <caption>Monthly Users</caption>
+  <table data-chart="bar">
+    <caption>Sample Bar</caption>
     <thead>
-      <tr><th>Month</th><th>Users</th><th>Active</th></tr>
+      <tr><th>Category</th><th>Series A</th><th>Series B</th></tr>
     </thead>
     <tbody>
-      <tr><td>Jan</td><td>1200</td><td>900</td></tr>
-      <tr><td>Feb</td><td>1800</td><td>1400</td></tr>
-      <tr><td>Mar</td><td>1500</td><td>1100</td></tr>
-      <tr><td>Apr</td><td>2200</td><td>1800</td></tr>
-      <tr><td>May</td><td>2800</td><td>2200</td></tr>
+      <tr><td>Alpha</td><td>420</td><td>180</td></tr>
+      <tr><td>Beta</td><td>580</td><td>240</td></tr>
+      <tr><td>Gamma</td><td>510</td><td>210</td></tr>
+      <tr><td>Delta</td><td>690</td><td>310</td></tr>
     </tbody>
   </table>
 
-  <table data-chart="donut">
-    <caption>Budget Allocation</caption>
+  <table data-chart="line" data-chart-grid="y">
+    <caption>Sample Line</caption>
     <thead>
-      <tr><th>Category</th><th>Budget</th></tr>
+      <tr><th>Period</th><th>Value</th></tr>
     </thead>
     <tbody>
-      <tr><td>Engineering</td><td>45</td></tr>
-      <tr><td>Marketing</td><td>25</td></tr>
-      <tr><td>Sales</td><td>20</td></tr>
-      <tr><td>Support</td><td>10</td></tr>
+      <tr><td>W1</td><td>1200</td></tr>
+      <tr><td>W2</td><td>1800</td></tr>
+      <tr><td>W3</td><td>1500</td></tr>
+      <tr><td>W4</td><td>2200</td></tr>
+      <tr><td>W5</td><td>2800</td></tr>
+    </tbody>
+  </table>
+
+  <table data-chart="pie">
+    <caption>Sample Pie</caption>
+    <thead>
+      <tr><th>Segment</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>40</td></tr>
+      <tr><td>B</td><td>25</td></tr>
+      <tr><td>C</td><td>20</td></tr>
+      <tr><td>D</td><td>15</td></tr>
+    </tbody>
+  </table>
+
+  <hr style="margin: 3rem 0; border: none; border-top: 1px solid #ddd;">
+  <h2>With Animation</h2>
+
+  <table data-chart="bar" data-chart-animate>
+    <caption>Animated Bar</caption>
+    <thead>
+      <tr><th>Category</th><th>Series A</th><th>Series B</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Alpha</td><td>420</td><td>180</td></tr>
+      <tr><td>Beta</td><td>580</td><td>240</td></tr>
+      <tr><td>Gamma</td><td>510</td><td>210</td></tr>
+      <tr><td>Delta</td><td>690</td><td>310</td></tr>
+    </tbody>
+  </table>
+
+  <table data-chart="line" data-chart-grid="y" data-chart-animate>
+    <caption>Animated Line</caption>
+    <thead>
+      <tr><th>Period</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>W1</td><td>1200</td></tr>
+      <tr><td>W2</td><td>1800</td></tr>
+      <tr><td>W3</td><td>1500</td></tr>
+      <tr><td>W4</td><td>2200</td></tr>
+      <tr><td>W5</td><td>2800</td></tr>
+    </tbody>
+  </table>
+
+  <table data-chart="pie" data-chart-animate>
+    <caption>Animated Pie</caption>
+    <thead>
+      <tr><th>Segment</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>40</td></tr>
+      <tr><td>B</td><td>25</td></tr>
+      <tr><td>C</td><td>20</td></tr>
+      <tr><td>D</td><td>15</td></tr>
     </tbody>
   </table>
 </Layout>
