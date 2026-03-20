@@ -9,7 +9,7 @@ export function forwardAnimAttributes(
 ): string[] {
   const forwarded: string[] = [];
   for (const attr of Array.from(table.attributes)) {
-    if (attr.name.startsWith('data-anim')) {
+    if (attr.name.startsWith("data-anim")) {
       container.setAttribute(attr.name, attr.value);
       forwarded.push(attr.name);
     }

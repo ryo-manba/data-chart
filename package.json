@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "happy-dom": "^16.7.0",
+    "oxfmt": "^0.41.0",
     "oxlint": "^0.16.0",
     "terser": "^5.46.1",
     "typescript": "^5.8.0",

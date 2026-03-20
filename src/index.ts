@@ -1,20 +1,36 @@
-import type { ChartConfig, ChartType, DataChartAPI, GridOption, LegendPosition, ParsedData } from './types';
-import { parseTable } from './parser';
-import { getColors, injectStyles } from './theme';
-import { renderBar } from './renderer/bar';
-import { renderLine } from './renderer/line';
-import { renderArea } from './renderer/area';
-import { renderPie } from './renderer/pie';
-import { renderDonut } from './renderer/donut';
+import type {
+  ChartConfig,
+  ChartType,
+  DataChartAPI,
+  GridOption,
+  LegendPosition,
+  ParsedData,
+} from "./types";
+import { parseTable } from "./parser";
+import { getColors, injectStyles } from "./theme";
+import { renderBar } from "./renderer/bar";
+import { renderLine } from "./renderer/line";
+import { renderArea } from "./renderer/area";
+import { renderPie } from "./renderer/pie";
+import { renderDonut } from "./renderer/donut";
 
-const R: Record<ChartType, (d: ParsedData, c: ChartConfig, cl: string[]) => SVGSVGElement> = { bar: renderBar, line: renderLine, area: renderArea, pie: renderPie, donut: renderDonut };
+const R: Record<ChartType, (d: ParsedData, c: ChartConfig, cl: string[]) => SVGSVGElement> = {
+  bar: renderBar,
+  line: renderLine,
+  area: renderArea,
+  pie: renderPie,
+  donut: renderDonut,
+};
 
 function forwardAnim(t: HTMLTableElement, c: HTMLDivElement): void {
-  for (const a of Array.from(t.attributes)) if (a.name.startsWith('data-anim')) c.setAttribute(a.name, a.value);
+  for (const a of Array.from(t.attributes))
+    if (a.name.startsWith("data-anim")) c.setAttribute(a.name, a.value);
 }
 
 function raf2(fn: () => void): void {
-  requestAnimationFrame(() => { requestAnimationFrame(fn); });
+  requestAnimationFrame(() => {
+    requestAnimationFrame(fn);
+  });
 }
 
 interface AnimTarget {
@@ -24,22 +40,23 @@ interface AnimTarget {
 }
 
 function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | null {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return null;
-  svg.classList.add('dc-anim');
+  if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion:reduce)").matches)
+    return null;
+  svg.classList.add("dc-anim");
 
   const d = cfg.animDuration;
   const sg = cfg.animStagger;
-  const bars = svg.querySelectorAll('.data-chart-bar');
-  const lines = svg.querySelectorAll('.data-chart-line');
-  const dots = svg.querySelectorAll('.data-chart-dot');
-  const slices = svg.querySelectorAll('.data-chart-slice');
+  const bars = svg.querySelectorAll(".data-chart-bar");
+  const lines = svg.querySelectorAll(".data-chart-line");
+  const dots = svg.querySelectorAll(".data-chart-dot");
+  const slices = svg.querySelectorAll(".data-chart-slice");
   const targets: AnimTarget[] = [];
 
   if (cfg.horizontal) {
     bars.forEach((el, i) => {
       const rect = el as SVGRectElement;
-      const finalW = rect.getAttribute('width') ?? '0';
-      rect.setAttribute('width', '0');
+      const finalW = rect.getAttribute("width") ?? "0";
+      rect.setAttribute("width", "0");
       rect.style.transition = `width ${d}ms ease-out ${i * sg}ms`;
       targets.push({ el: rect, attrs: { width: finalW } });
     });
@@ -49,9 +66,9 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
       const rect = el as SVGRectElement;
       barData.push({
         rect,
-        finalH: parseFloat(rect.getAttribute('height') ?? '0'),
-        finalY: parseFloat(rect.getAttribute('y') ?? '0'),
-        x: parseFloat(rect.getAttribute('x') ?? '0').toFixed(1),
+        finalH: parseFloat(rect.getAttribute("height") ?? "0"),
+        finalY: parseFloat(rect.getAttribute("y") ?? "0"),
+        x: parseFloat(rect.getAttribute("x") ?? "0").toFixed(1),
       });
     });
 
@@ -68,8 +85,8 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
         segs.sort((a, b) => b.finalY - a.finalY);
         segs.forEach((b, segIdx) => {
           const delay = colIdx * (sg * 2) + segIdx * segDur;
-          b.rect.setAttribute('height', '0');
-          b.rect.setAttribute('y', String(b.finalY + b.finalH));
+          b.rect.setAttribute("height", "0");
+          b.rect.setAttribute("y", String(b.finalY + b.finalH));
           b.rect.style.transition = `height ${segDur}ms ease-out ${delay}ms, y ${segDur}ms ease-out ${delay}ms`;
           targets.push({ el: b.rect, attrs: { height: String(b.finalH), y: String(b.finalY) } });
         });
@@ -77,8 +94,8 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
       }
     } else {
       barData.forEach((b, i) => {
-        b.rect.setAttribute('height', '0');
-        b.rect.setAttribute('y', String(b.finalY + b.finalH));
+        b.rect.setAttribute("height", "0");
+        b.rect.setAttribute("y", String(b.finalY + b.finalH));
         b.rect.style.transition = `height ${d}ms ease-out ${i * sg}ms, y ${d}ms ease-out ${i * sg}ms`;
         targets.push({ el: b.rect, attrs: { height: String(b.finalH), y: String(b.finalY) } });
       });
@@ -89,11 +106,11 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
   const lineDur = Math.round(d * 1.6);
   lines.forEach((el) => {
     const path = el as SVGPathElement;
-    path.setAttribute('pathLength', '1');
-    path.style.strokeDasharray = '1';
-    path.style.strokeDashoffset = '1';
+    path.setAttribute("pathLength", "1");
+    path.style.strokeDasharray = "1";
+    path.style.strokeDashoffset = "1";
     path.style.transition = `stroke-dashoffset ${lineDur}ms ease-out`;
-    targets.push({ el: path, style: { strokeDashoffset: '0' } });
+    targets.push({ el: path, style: { strokeDashoffset: "0" } });
   });
 
   // Dots: fade in after line draws
@@ -103,15 +120,15 @@ function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | n
 
   // Pie/Donut slices
   if (slices.length > 0) {
-    const cx = cfg.type === 'pie' || cfg.type === 'donut' ? '150px' : '50%';
-    const cy = cfg.type === 'pie' || cfg.type === 'donut' ? '120px' : '50%';
+    const cx = cfg.type === "pie" || cfg.type === "donut" ? "150px" : "50%";
+    const cy = cfg.type === "pie" || cfg.type === "donut" ? "120px" : "50%";
     slices.forEach((el, i) => {
       const s = el as SVGElement;
       s.style.transformOrigin = `${cx} ${cy}`;
-      s.style.transform = 'scale(0.3)';
-      s.style.opacity = '0';
+      s.style.transform = "scale(0.3)";
+      s.style.opacity = "0";
       s.style.transition = `transform ${d}ms cubic-bezier(0.25,0.46,0.45,0.94) ${i * sg}ms, opacity ${Math.round(d / 2)}ms ease-out ${i * sg}ms`;
-      targets.push({ el: s, style: { transform: 'scale(1)', opacity: '0.85' } });
+      targets.push({ el: s, style: { transform: "scale(1)", opacity: "0.85" } });
     });
   }
 
@@ -122,50 +139,59 @@ function startAnimations(targets: AnimTarget[]): void {
   raf2(() => {
     for (const t of targets) {
       if (t.attrs) for (const [k, v] of Object.entries(t.attrs)) t.el.setAttribute(k, v);
-      if (t.style) for (const [k, v] of Object.entries(t.style)) (t.el.style as unknown as Record<string, string>)[k] = v;
+      if (t.style)
+        for (const [k, v] of Object.entries(t.style))
+          (t.el.style as unknown as Record<string, string>)[k] = v;
     }
   });
 }
 
 function renderChart(table: HTMLTableElement): SVGSVGElement {
-  const type = (table.getAttribute('data-chart') ?? '') as ChartType;
-  if (!R[type]) throw new Error('INVALID_TYPE');
+  const type = (table.getAttribute("data-chart") ?? "") as ChartType;
+  if (!R[type]) throw new Error("INVALID_TYPE");
 
   let data: ParsedData;
-  try { data = parseTable(table); } catch (e) {
-    table.dispatchEvent(new CustomEvent('datachart:error', { detail: { message: String(e) } }));
+  try {
+    data = parseTable(table);
+  } catch (e) {
+    table.dispatchEvent(new CustomEvent("datachart:error", { detail: { message: String(e) } }));
     throw e;
   }
 
   const cfg: ChartConfig = {
     type,
-    height: parseInt(table.getAttribute('data-chart-height') ?? '220', 10),
+    height: parseInt(table.getAttribute("data-chart-height") ?? "220", 10),
     colors: [],
-    grid: (table.getAttribute('data-chart-grid') ?? 'y') as GridOption,
-    legend: (table.getAttribute('data-chart-legend') as LegendPosition | null) ?? (data.headers.length > 1 ? 'top' : 'none'),
-    radius: parseInt(table.getAttribute('data-chart-radius') ?? '3', 10),
-    horizontal: table.hasAttribute('data-chart-horizontal'),
-    stacked: table.hasAttribute('data-chart-stacked'),
+    grid: (table.getAttribute("data-chart-grid") ?? "y") as GridOption,
+    legend:
+      (table.getAttribute("data-chart-legend") as LegendPosition | null) ??
+      (data.headers.length > 1 ? "top" : "none"),
+    radius: parseInt(table.getAttribute("data-chart-radius") ?? "3", 10),
+    horizontal: table.hasAttribute("data-chart-horizontal"),
+    stacked: table.hasAttribute("data-chart-stacked"),
 
-    animate: table.hasAttribute('data-chart-animate'),
-    animDuration: parseInt(table.getAttribute('data-chart-animate-duration') ?? '600', 10),
-    animStagger: parseInt(table.getAttribute('data-chart-animate-stagger') ?? '60', 10),
+    animate: table.hasAttribute("data-chart-animate"),
+    animDuration: parseInt(table.getAttribute("data-chart-animate-duration") ?? "600", 10),
+    animStagger: parseInt(table.getAttribute("data-chart-animate-stagger") ?? "60", 10),
   };
 
-  const colors = getColors(table.getAttribute('data-chart-colors'), Math.max(data.headers.length, data.labels.length));
+  const colors = getColors(
+    table.getAttribute("data-chart-colors"),
+    Math.max(data.headers.length, data.labels.length),
+  );
   cfg.colors = colors;
   const svg = R[type]!(data, cfg, colors);
-  svg.setAttribute('role', 'img');
-  svg.setAttribute('aria-label', data.caption ?? `${type} chart: ${data.headers.join(', ')}`);
-  table.setAttribute('aria-hidden', 'true');
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", data.caption ?? `${type} chart: ${data.headers.join(", ")}`);
+  table.setAttribute("aria-hidden", "true");
 
   // Setup animation initial state BEFORE adding to DOM (prevents flash of final state)
   const animTargets = cfg.animate ? setupAnimations(svg, cfg) : null;
 
-  const ct = document.createElement('div');
-  ct.className = 'data-chart-container';
+  const ct = document.createElement("div");
+  ct.className = "data-chart-container";
   forwardAnim(table, ct);
-  table.classList.add('data-chart-rendered');
+  table.classList.add("data-chart-rendered");
   table.parentNode?.insertBefore(ct, table);
   ct.appendChild(table);
   ct.appendChild(svg);
@@ -173,48 +199,72 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
   // Start transitions AFTER DOM insertion
   if (animTargets) startAnimations(animTargets);
 
-  table.dispatchEvent(new CustomEvent('datachart:rendered', { detail: { svg, data } }));
+  table.dispatchEvent(new CustomEvent("datachart:rendered", { detail: { svg, data } }));
   return svg;
 }
 
 function destroy(t: HTMLTableElement): void {
-  const c = t.closest('.data-chart-container');
+  const c = t.closest(".data-chart-container");
   if (!c) return;
-  t.classList.remove('data-chart-rendered');
-  t.removeAttribute('aria-hidden');
+  t.classList.remove("data-chart-rendered");
+  t.removeAttribute("aria-hidden");
   c.parentNode?.insertBefore(t, c);
   c.remove();
-  t.dispatchEvent(new CustomEvent('datachart:destroyed'));
+  t.dispatchEvent(new CustomEvent("datachart:destroyed"));
 }
 
-function safeRender(t: HTMLTableElement): void { try { renderChart(t); } catch { /* dispatched */ } }
+function safeRender(t: HTMLTableElement): void {
+  try {
+    renderChart(t);
+  } catch {
+    /* dispatched */
+  }
+}
 
 function init(): void {
   injectStyles();
-  for (const t of document.querySelectorAll<HTMLTableElement>('table[data-chart]'))
-    if (!t.classList.contains('data-chart-rendered')) safeRender(t);
+  for (const t of document.querySelectorAll<HTMLTableElement>("table[data-chart]"))
+    if (!t.classList.contains("data-chart-rendered")) safeRender(t);
   new MutationObserver((ms) => {
-    for (const m of ms) for (const n of m.addedNodes)
-      if (n instanceof HTMLElement) {
-        const ts: HTMLTableElement[] = n.matches?.('table[data-chart]') ? [n as HTMLTableElement] : Array.from(n.querySelectorAll?.('table[data-chart]') ?? []);
-        for (const t of ts) if (!t.classList.contains('data-chart-rendered')) safeRender(t);
-      }
+    for (const m of ms)
+      for (const n of m.addedNodes)
+        if (n instanceof HTMLElement) {
+          const ts: HTMLTableElement[] = n.matches?.("table[data-chart]")
+            ? [n as HTMLTableElement]
+            : Array.from(n.querySelectorAll?.("table[data-chart]") ?? []);
+          for (const t of ts) if (!t.classList.contains("data-chart-rendered")) safeRender(t);
+        }
   }).observe(document.body, { childList: true, subtree: true });
 }
 
 const api: DataChartAPI = {
-  init, render: renderChart,
-  refresh(t) { destroy(t); return renderChart(t); },
-  destroy(t?) { if (t) destroy(t); else for (const el of document.querySelectorAll<HTMLTableElement>('table.data-chart-rendered')) destroy(el); },
-  version: '0.1.0',
+  init,
+  render: renderChart,
+  refresh(t) {
+    destroy(t);
+    return renderChart(t);
+  },
+  destroy(t?) {
+    if (t) destroy(t);
+    else
+      for (const el of document.querySelectorAll<HTMLTableElement>("table.data-chart-rendered"))
+        destroy(el);
+  },
+  version: "0.1.0",
 };
 
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-  if (typeof window !== 'undefined') window.dataChart = api;
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+  if (typeof window !== "undefined") window.dataChart = api;
 }
 
 export default api;
-export { parseTable } from './parser';
-export type { ParsedData, ChartType, ChartConfig, DataChartAPI } from './types';
-export type { DataChartType, DataChartGrid, DataChartLegend, DataChartAttributes } from './attributes';
+export { parseTable } from "./parser";
+export type { ParsedData, ChartType, ChartConfig, DataChartAPI } from "./types";
+export type {
+  DataChartType,
+  DataChartGrid,
+  DataChartLegend,
+  DataChartAttributes,
+} from "./attributes";

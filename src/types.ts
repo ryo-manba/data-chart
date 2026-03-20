@@ -5,11 +5,11 @@ export interface ParsedData {
   caption?: string;
 }
 
-export type ChartType = 'bar' | 'line' | 'area' | 'pie' | 'donut';
+export type ChartType = "bar" | "line" | "area" | "pie" | "donut";
 
-export type GridOption = 'y' | 'x' | 'both' | 'none';
+export type GridOption = "y" | "x" | "both" | "none";
 
-export type LegendPosition = 'top' | 'bottom' | 'none';
+export type LegendPosition = "top" | "bottom" | "none";
 
 export interface ChartConfig {
   type: ChartType;
