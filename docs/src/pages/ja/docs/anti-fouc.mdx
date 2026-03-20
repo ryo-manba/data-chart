@@ -1,0 +1,81 @@
+---
+layout: ../../../layouts/DocsLayout.astro
+title: Anti-FOUC
+description: チャートレンダリング前のスタイル未適用テーブルのフラッシュを防止する方法。
+---
+
+# Anti-FOUC
+
+FOUC (Flash of Unstyled Content) は、JavaScript がテーブルをチャートに変換する前に、生のテーブルが一瞬表示される現象です。
+
+## デフォルトの動作
+
+data-chart は初期化時にすべての `table[data-chart]` 要素を非表示にする CSS を自動注入します。**ほとんどの場合、追加の CSS は不要です** -- スクリプトを読み込むだけで動作します:
+
+```html
+<script src="https://unpkg.com/data-chart" defer></script>
+```
+
+ただし、`defer` スクリプトは HTML パース後に実行されるため、スクリプト実行前にテーブルが表示される短い時間（通常 50ms 未満）があります。
+
+## オプション: フラッシュを完全に排除
+
+ゼロフラッシュの読み込みが必要な場合、`<head>` にインライン `<style>` を追加してください:
+
+```html
+<style>
+  table[data-chart] {
+    visibility: hidden;
+    position: absolute;
+    width: 0; height: 0;
+    overflow: hidden;
+  }
+</style>
+```
+
+これはレンダリング前にパースされるため、テーブルが表示されることはありません。同じルールはインポート可能な CSS ファイルとしても利用できます:
+
+```js
+import 'data-chart/css';
+```
+
+## `<noscript>` フォールバック
+
+インライン Anti-FOUC CSS を使用する場合、JavaScript 無効時にテーブルがアクセス可能であるよう `<noscript>` フォールバックを追加してください:
+
+```html
+<noscript>
+  <style>
+    table[data-chart] {
+      visibility: visible;
+      position: static;
+      width: auto; height: auto;
+      overflow: visible;
+    }
+  </style>
+</noscript>
+```
+
+## レイアウトシフト (CLS) の防止
+
+チャート SVG の挿入はレイアウトシフトを引き起こす可能性があります。これを防ぐには、`aspect-ratio` を使ってチャートコンテナのスペースを確保します:
+
+```css
+.chart-wrapper {
+  aspect-ratio: 500 / 220;
+}
+```
+
+SVG の viewBox 幅は常に `500` です。高さのデフォルトは `220` で、`data-chart-height` で変更できます。カスタム高さを設定した場合は、比率も更新してください:
+
+```html
+<table data-chart="bar" data-chart-height="300">...</table>
+```
+
+```css
+.chart-wrapper {
+  aspect-ratio: 500 / 300;
+}
+```
+
+インライン Anti-FOUC CSS とスペース確保を組み合わせることで、CLS を効果的に排除できます。

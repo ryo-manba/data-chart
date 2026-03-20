@@ -21,7 +21,7 @@ export function createSvg(w: number, h: number): SVGSVGElement {
 
 export function computeLayout(c: ChartConfig, sc: number): ChartLayout {
   const w = 500,
-    h = c.height,
+    h = c.height + (c.legend === "bottom" && sc > 1 ? 28 : 0),
     pt = 20 + (c.legend === "top" && sc > 1 ? 28 : 0),
     pl = 46,
     pr = 20,
@@ -82,17 +82,22 @@ function renderChrome(
           }),
         );
       }
-    if (cfg.grid === "x" || cfg.grid === "both")
-      g.appendChild(
-        svgEl("line", {
-          x1: l.paddingLeft,
-          y1: l.paddingTop,
-          x2: l.paddingLeft,
-          y2: l.paddingTop + l.chartHeight,
-          stroke: gc,
-          "stroke-width": 1,
-        }),
-      );
+    if (cfg.grid === "x" || cfg.grid === "both") {
+      const gw = l.chartWidth / labels.length;
+      for (let i = 0; i < labels.length; i++) {
+        const x = l.paddingLeft + gw * i + gw / 2;
+        g.appendChild(
+          svgEl("line", {
+            x1: x,
+            y1: l.paddingTop,
+            x2: x,
+            y2: l.paddingTop + l.chartHeight,
+            stroke: gc,
+            "stroke-width": 1,
+          }),
+        );
+      }
+    }
     svg.appendChild(g);
   }
   // Y-axis

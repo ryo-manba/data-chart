@@ -1,0 +1,48 @@
+---
+layout: ../../../layouts/DocsLayout.astro
+title: TypeScript
+description: React や Vue で data-chart 属性の完全な補完を得る方法。
+---
+
+# TypeScript
+
+data-chart には型定義が組み込まれています。一度インポートするだけで、すべての `data-chart-*` 属性の補完が有効になります。追加設定は不要です。
+
+## セットアップ
+
+```ts
+import 'data-chart';
+```
+
+これだけです。このインポートにより、**React (JSX/TSX)** と **Vue** テンプレートの型拡張が登録されます。
+
+## 提供される機能
+
+すべての `data-chart-*` 属性がフルタイプ補完付きで利用できます:
+
+```tsx
+// React / TSX
+<table
+  data-chart="bar"                    // "bar" | "line" | "area" | "pie" | "donut"
+  data-chart-grid="y"                 // "y" | "x" | "both" | "none"
+  data-chart-legend="top"             // "top" | "bottom" | "none"
+  data-chart-height="300"
+  data-chart-radius="6"
+  data-chart-colors="#2d5be3,#1a8c5a"
+  data-chart-stacked
+  data-chart-horizontal
+/>
+```
+
+## エクスポートされた型
+
+カスタム用途に型を直接インポートできます:
+
+```ts
+import type {
+  DataChartType,        // "bar" | "line" | "area" | "pie" | "donut"
+  DataChartGrid,        // "y" | "x" | "both" | "none"
+  DataChartLegend,      // "top" | "bottom" | "none"
+  DataChartAttributes,  // 全 data-chart-* 属性のインターフェース
+} from 'data-chart';
+```

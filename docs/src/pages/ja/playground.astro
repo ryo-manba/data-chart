@@ -1,17 +1,17 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
 ---
 
-<Layout title="Playground - data-chart">
+<Layout title="Playground - data-chart" lang="ja">
   <Header />
   <div class="min-h-screen">
     <!-- Header -->
     <section class="px-6 pt-28 pb-10 max-w-5xl mx-auto text-center">
       <h1 class="text-4xl font-heading font-extrabold tracking-tight text-text">Playground</h1>
       <p class="mt-4 text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-        Choose a chart type and customize options. Edit the table data to see live changes.
+        チャートタイプを選んでオプションをカスタマイズ。テーブルデータを編集してリアルタイムで変化を確認できます。
       </p>
     </section>
 
@@ -25,7 +25,7 @@ import Footer from "../components/Footer.astro";
           <!-- Preview card -->
           <div class="glass-card p-6">
             <div class="flex items-center justify-between mb-4">
-              <h2 class="text-lg font-heading font-semibold text-text">Preview</h2>
+              <h2 class="text-lg font-heading font-semibold text-text">プレビュー</h2>
               <button
                 type="button"
                 id="replay-btn"
@@ -35,7 +35,7 @@ import Footer from "../components/Footer.astro";
                   <path d="M1 7a6 6 0 1 1 1.76 4.24"/>
                   <polyline points="1 11.5 1 7.5 5 7.5"/>
                 </svg>
-                Replay
+                リプレイ
               </button>
             </div>
             <div id="chart-preview" class="min-h-[300px]">
@@ -60,13 +60,13 @@ import Footer from "../components/Footer.astro";
           <!-- Generated HTML card -->
           <div class="glass-card p-6">
             <div class="flex items-center justify-between mb-4">
-              <h2 class="text-lg font-heading font-semibold text-text">Generated HTML</h2>
+              <h2 class="text-lg font-heading font-semibold text-text">生成された HTML</h2>
               <button
                 type="button"
                 id="copy-btn"
                 class="chip-btn"
               >
-                Copy
+                コピー
               </button>
             </div>
             <pre class="bg-code-bg border border-border rounded-lg p-4 text-sm text-text-secondary font-mono overflow-x-auto leading-relaxed max-h-[300px] overflow-y-auto"><code id="generated-code"></code></pre>
@@ -78,7 +78,7 @@ import Footer from "../components/Footer.astro";
 
           <!-- Chart Type card -->
           <div class="glass-card p-6">
-            <h2 class="text-sm font-heading font-bold text-text mb-3">Chart Type</h2>
+            <h2 class="text-sm font-heading font-bold text-text mb-3">チャートタイプ</h2>
             <div class="flex flex-wrap gap-2" id="chart-type-group">
               <button type="button" class="pill-btn active" data-group="chart-type" data-value="bar">bar</button>
               <button type="button" class="pill-btn" data-group="chart-type" data-value="line">line</button>
@@ -91,22 +91,20 @@ import Footer from "../components/Footer.astro";
 
           <!-- Options card -->
           <div class="glass-card p-6">
-            <h2 class="text-sm font-heading font-bold text-text mb-4">Options</h2>
+            <h2 class="text-sm font-heading font-bold text-text mb-4">オプション</h2>
 
             <!-- Grid -->
             <div class="mb-5">
-              <label class="text-sm text-text-secondary mb-2 block">Grid</label>
+              <label class="text-sm text-text-secondary mb-2 block">グリッド</label>
               <div class="flex flex-wrap gap-2" id="grid-group">
-                <button type="button" class="pill-btn active" data-group="grid" data-value="y">horizontal</button>
-                <button type="button" class="pill-btn" data-group="grid" data-value="x">vertical</button>
-                <button type="button" class="pill-btn" data-group="grid" data-value="both">both</button>
+                <button type="button" class="pill-btn active" data-group="grid" data-value="y">y</button>
                 <button type="button" class="pill-btn" data-group="grid" data-value="none">none</button>
               </div>
             </div>
 
             <!-- Legend -->
             <div class="mb-5">
-              <label class="text-sm text-text-secondary mb-2 block">Legend</label>
+              <label class="text-sm text-text-secondary mb-2 block">凡例</label>
               <div class="flex flex-wrap gap-2" id="legend-group">
                 <button type="button" class="pill-btn active" data-group="legend" data-value="top">top</button>
                 <button type="button" class="pill-btn" data-group="legend" data-value="bottom">bottom</button>
@@ -117,7 +115,7 @@ import Footer from "../components/Footer.astro";
             <!-- Radius -->
             <div class="mb-5">
               <label class="text-sm text-text-secondary mb-2 block">
-                Radius <span id="radius-value" class="text-text font-mono ml-1">3</span>
+                角丸半径 <span id="radius-value" class="text-text font-mono ml-1">3</span>
               </label>
               <input
                 type="range"
@@ -131,7 +129,7 @@ import Footer from "../components/Footer.astro";
 
             <!-- Stacked -->
             <div class="flex items-center gap-3">
-              <label class="text-sm text-text-secondary">Stacked</label>
+              <label class="text-sm text-text-secondary">積み上げ</label>
               <input
                 type="checkbox"
                 id="stacked-input"
@@ -142,11 +140,11 @@ import Footer from "../components/Footer.astro";
 
           <!-- Animation card -->
           <div class="glass-card p-6">
-            <h2 class="text-sm font-heading font-bold text-text mb-4">Animation</h2>
+            <h2 class="text-sm font-heading font-bold text-text mb-4">アニメーション</h2>
 
             <!-- Animate toggle -->
             <div class="flex items-center gap-3 mb-4">
-              <label class="text-sm text-text-secondary">Animate</label>
+              <label class="text-sm text-text-secondary">アニメーション</label>
               <input
                 type="checkbox"
                 id="animate-input"
@@ -191,7 +189,7 @@ import Footer from "../components/Footer.astro";
 
           <!-- Colors card -->
           <div class="glass-card p-6">
-            <h2 class="text-sm font-heading font-bold text-text mb-3">Colors</h2>
+            <h2 class="text-sm font-heading font-bold text-text mb-3">カラー</h2>
             <div class="flex flex-wrap gap-2" id="colors-group">
               <button type="button" class="w-8 h-8 rounded-full border-2 border-transparent hover:border-white/50 transition-colors cursor-pointer" style="background:#2d5be3" data-color="#2d5be3" aria-label="Color #2d5be3"></button>
               <button type="button" class="w-8 h-8 rounded-full border-2 border-transparent hover:border-white/50 transition-colors cursor-pointer" style="background:#1a8c5a" data-color="#1a8c5a" aria-label="Color #1a8c5a"></button>
@@ -256,7 +254,7 @@ import Footer from "../components/Footer.astro";
   </style>
 
   <script>
-    import dataChart from '../../../src/index.ts';
+    import dataChart from '../../../../src/index.ts';
 
     const DEFAULTS = {
       chartType: 'bar',

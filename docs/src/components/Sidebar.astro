@@ -2,30 +2,58 @@
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const currentPath = Astro.url.pathname;
 
-const sections = [
-  {
-    title: 'Getting Started',
-    links: [
-      { href: `${base}docs/getting-started/`, label: 'Installation & Setup' },
-    ],
-  },
-  {
-    title: 'Core Concepts',
-    links: [
-      { href: `${base}docs/chart-types/`, label: 'Chart Types' },
-      { href: `${base}docs/animation/`, label: 'Animation' },
-      { href: `${base}docs/attributes/`, label: 'Attributes' },
-    ],
-  },
-  {
-    title: 'Advanced',
-    links: [
-      { href: `${base}docs/typescript/`, label: 'TypeScript' },
-      { href: `${base}docs/integration/`, label: 'Integration' },
-      { href: `${base}docs/anti-fouc/`, label: 'Anti-FOUC' },
-    ],
-  },
-];
+const isJa = currentPath.includes('/ja/');
+const langPrefix = isJa ? 'ja/' : '';
+
+const sections = isJa
+  ? [
+      {
+        title: 'はじめに',
+        links: [
+          { href: `${base}${langPrefix}docs/getting-started/`, label: 'インストール & セットアップ' },
+        ],
+      },
+      {
+        title: '基本',
+        links: [
+          { href: `${base}${langPrefix}docs/chart-types/`, label: 'チャートタイプ' },
+          { href: `${base}${langPrefix}docs/animation/`, label: 'アニメーション' },
+          { href: `${base}${langPrefix}docs/attributes/`, label: '属性' },
+        ],
+      },
+      {
+        title: '応用',
+        links: [
+          { href: `${base}${langPrefix}docs/typescript/`, label: 'TypeScript' },
+          { href: `${base}${langPrefix}docs/integration/`, label: 'インテグレーション' },
+          { href: `${base}${langPrefix}docs/anti-fouc/`, label: 'Anti-FOUC' },
+        ],
+      },
+    ]
+  : [
+      {
+        title: 'Getting Started',
+        links: [
+          { href: `${base}docs/getting-started/`, label: 'Installation & Setup' },
+        ],
+      },
+      {
+        title: 'Core Concepts',
+        links: [
+          { href: `${base}docs/chart-types/`, label: 'Chart Types' },
+          { href: `${base}docs/animation/`, label: 'Animation' },
+          { href: `${base}docs/attributes/`, label: 'Attributes' },
+        ],
+      },
+      {
+        title: 'Advanced',
+        links: [
+          { href: `${base}docs/typescript/`, label: 'TypeScript' },
+          { href: `${base}docs/integration/`, label: 'Integration' },
+          { href: `${base}docs/anti-fouc/`, label: 'Anti-FOUC' },
+        ],
+      },
+    ];
 
 function isActive(href: string): boolean {
   return currentPath === href || currentPath === href.replace(/\/$/, '');

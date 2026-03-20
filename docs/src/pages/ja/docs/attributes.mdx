@@ -1,0 +1,96 @@
+---
+layout: ../../../layouts/DocsLayout.astro
+title: 属性
+description: data-chart の全 HTML 属性リファレンス。
+---
+
+# 属性
+
+すべての設定は HTML data 属性で行います。JavaScript の設定オブジェクトは不要です。
+
+## 必須
+
+| 属性 | 値 | 説明 |
+|-----------|--------|-------------|
+| `data-chart` | `bar` \| `line` \| `area` \| `pie` \| `donut` | チャートタイプ（必須） |
+
+## レイアウト
+
+| 属性 | 型 | デフォルト | 説明 |
+|-----------|------|---------|-------------|
+| `data-chart-height` | number | `220` | チャートの高さ（px）。幅は親要素に従います。 |
+| `data-chart-horizontal` | boolean | -- | 横棒グラフ。`bar` のみ。 |
+| `data-chart-stacked` | boolean | -- | 積み上げ棒グラフ。`bar` のみ。 |
+
+## スタイリング
+
+| 属性 | 型 | デフォルト | 説明 |
+|-----------|------|---------|-------------|
+| `data-chart-colors` | カンマ区切り hex | 自動パレット | カスタムシリーズ色。例: `"#2d5be3,#1a8c5a"` |
+| `data-chart-grid` | `y` \| `x` \| `both` \| `none` | `y` | グリッド線の方向 |
+| `data-chart-legend` | `top` \| `bottom` \| `none` | auto | 凡例の位置。Auto: 2シリーズ以上で `top`、1シリーズで `none`。 |
+| `data-chart-radius` | number | `3` | 棒の角丸半径（px） |
+
+## アニメーション
+
+| 属性 | 型 | デフォルト | 説明 |
+|-----------|------|---------|-------------|
+| `data-chart-animate` | boolean | -- | エントランスアニメーションを有効化 |
+| `data-chart-animate-duration` | number (ms) | `600` | 要素ごとのアニメーション時間 |
+| `data-chart-animate-stagger` | number (ms) | `60` | 要素間の遅延 |
+
+## 使用例
+
+### 最小構成
+
+```html
+<table data-chart="bar">...</table>
+```
+
+### フルオプション
+
+```html
+<table
+  data-chart="bar"
+  data-chart-height="300"
+  data-chart-colors="#e05898,#4a90d9,#1a8c5a"
+  data-chart-grid="both"
+  data-chart-legend="bottom"
+  data-chart-radius="6"
+  data-chart-stacked
+  data-chart-animate
+  data-chart-animate-duration="800"
+  data-chart-animate-stagger="100"
+>
+  ...
+</table>
+```
+
+## CSS カスタムプロパティ
+
+data-chart は最小限のスタイルシートを注入し、1つのカスタムプロパティを持ちます:
+
+```css
+:root {
+  --dc-font-family: system-ui, -apple-system, sans-serif;
+}
+```
+
+これを上書きすることで、軸ラベル、凡例、トグルボタンのフォントを変更できます。
+
+## CSS クラス
+
+| クラス | 要素 | 説明 |
+|-------|---------|-------------|
+| `.data-chart-container` | `<div>` | テーブル + SVG のラッパー |
+| `.data-chart-svg` | `<svg>` | チャート SVG 要素 |
+| `.data-chart-rendered` | `<table>` | 変換済みテーブルに付与 |
+| `.data-chart-grid` | `<g>` | グリッド線グループ |
+| `.data-chart-axis` | `<g>` | 軸ラベルグループ |
+| `.data-chart-series` | `<g>` | シリーズデータグループ |
+| `.data-chart-legend` | `<g>` | 凡例グループ |
+| `.data-chart-bar` | `<rect>` | 個々の棒 |
+| `.data-chart-line` | `<path>` | 折れ線パス |
+| `.data-chart-area` | `<path>` | エリア塗りつぶしパス |
+| `.data-chart-dot` | `<circle>` | データポイントのドット |
+| `.data-chart-slice` | `<path>` | 円/ドーナツスライス |

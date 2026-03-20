@@ -1,0 +1,95 @@
+---
+layout: ../../../layouts/DocsLayout.astro
+title: はじめに
+description: data-chart をインストールして、1分以内に最初のチャートを作成しましょう。
+---
+
+# はじめに
+
+## インストール
+
+### CDN
+
+```html
+<script src="https://unpkg.com/data-chart" defer></script>
+```
+
+### npm
+
+```bash
+npm install data-chart
+```
+
+```js
+import "data-chart";
+```
+
+### pnpm / yarn
+
+```bash
+pnpm add data-chart
+# or
+yarn add data-chart
+```
+
+## 基本的な使い方
+
+HTML `<table>` に `data-chart` 属性を追加するだけです:
+
+```html
+<table data-chart="bar">
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jan</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <td>Feb</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td>Mar</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <td>Apr</td>
+      <td>210</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+これだけです。data-chart はページ読み込み時にテーブルを自動的に SVG チャートに変換します。
+
+## 仕組み
+
+1. `DOMContentLoaded` で、data-chart はすべての `<table data-chart>` 要素を検出します
+2. 各テーブルをパース: `<thead>` がシリーズ名に、`<tbody>` がデータポイントになります
+3. SVG チャートが生成され、`.data-chart-container` ラッパー内に挿入されます
+4. 元のテーブルは非表示になります (`display: none` + `aria-hidden="true"`)
+5. `MutationObserver` が動的に追加されたテーブルを監視します (SPA サポート)
+
+## プログレッシブ・エンハンスメント
+
+JavaScript なしではテーブルが通常表示されます。JavaScript ありではチャートになります。これは設計によるプログレッシブ・エンハンスメントです。
+
+```html
+<!-- JS無効時はテーブルを表示 -->
+<!-- JS有効時はチャートを表示 -->
+<table data-chart="line">
+  ...
+</table>
+```
+
+## 次のステップ
+
+- [チャートタイプ](/data-chart/ja/docs/chart-types/) -- 6種類すべてのチャートタイプ
+- [属性](/data-chart/ja/docs/attributes/) -- 属性リファレンス
+- [アニメーション](/data-chart/ja/docs/animation/) -- エントランスアニメーションの追加
+- [Playground](/data-chart/ja/playground/) -- インタラクティブに試す
