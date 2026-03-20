@@ -4,7 +4,10 @@ const currentPath = Astro.url.pathname;
 const isJa = currentPath.includes('/ja/') || currentPath.endsWith('/ja');
 const homeHref = isJa ? `${base}ja/` : base;
 const langLabel = isJa ? 'English' : '日本語';
-const altPath = isJa ? base : `${base}ja/`;
+// Switch language while staying on the same page
+const altPath = isJa
+  ? currentPath.replace(`${base}ja/`, base)
+  : currentPath.replace(base, `${base}ja/`);
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
@@ -27,7 +30,7 @@ const altPath = isJa ? base : `${base}ja/`;
 
     <nav class="hidden md:flex items-center gap-6">
       <a
-        href={`${base}docs/getting-started/`}
+        href={isJa ? `${base}ja/docs/getting-started/` : `${base}docs/getting-started/`}
         class:list={['text-sm font-medium transition-colors no-underline', currentPath.includes('/docs') ? 'text-text' : 'text-text-secondary hover:text-text']}
       >
         Docs
@@ -79,7 +82,7 @@ const altPath = isJa ? base : `${base}ja/`;
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden hidden border-t border-border bg-bg/95 backdrop-blur-md">
     <nav class="flex flex-col p-4 gap-3">
-      <a href={`${base}docs/getting-started/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Docs</a>
+      <a href={isJa ? `${base}ja/docs/getting-started/` : `${base}docs/getting-started/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Docs</a>
       <a href={isJa ? `${base}ja/playground/` : `${base}playground/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Playground</a>
       <a href="https://www.npmjs.com/package/data-chart" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-text-secondary hover:text-text no-underline">npm</a>
       <a href="https://github.com/ryo-manba/data-chart" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-text-secondary hover:text-text no-underline">GitHub</a>
