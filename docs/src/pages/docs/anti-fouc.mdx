@@ -16,7 +16,7 @@ data-chart automatically injects CSS that hides all `table[data-chart]` elements
 <script src="https://unpkg.com/data-chart" defer></script>
 ```
 
-However, because `defer` scripts run after HTML parsing, there is a brief window (typically &lt;50ms) where the table may be visible before the script executes.
+However, because `defer` scripts run after HTML parsing, there is a brief window where the table may be visible before the script executes and injects the hiding CSS.
 
 ## Optional: Eliminate the Flash Completely
 
@@ -33,7 +33,9 @@ If you need zero-flash loading, add this inline `<style>` to your `<head>`:
 </style>
 ```
 
-This is parsed before any rendering occurs, so the table is never visible. The same rules are also available as an importable CSS file:
+This CSS lives in `<head>`, so the browser processes it before JavaScript loads. The table is never visible.
+
+If you use a bundler (Vite, webpack, etc.), you can import the same CSS as a module instead:
 
 ```js
 import 'data-chart/css';
@@ -41,7 +43,9 @@ import 'data-chart/css';
 
 ## `<noscript>` Fallback
 
-When using inline anti-FOUC CSS, add a `<noscript>` fallback so the table remains accessible with JavaScript disabled:
+The inline CSS above hides the table unconditionally. If JavaScript is disabled, data-chart won't run and the table stays invisible.
+
+Add a `<noscript>` block to restore visibility when JS is off:
 
 ```html
 <noscript>
