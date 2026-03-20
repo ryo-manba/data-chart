@@ -1,6 +1,6 @@
 {
   "name": "data-chart",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Chart your tables. No JavaScript to write.",
   "type": "module",
   "main": "dist/data-chart.umd.cjs",
