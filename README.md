@@ -1,4 +1,7 @@
 <div align="center">
+
+<a href="https://ryo-manba.github.io/data-chart/"><img src="https://raw.githubusercontent.com/ryo-manba/data-chart/main/docs/public/og-image.png" alt="data-chart" width="100%" /></a>
+
   <h1>data-chart</h1>
 
 <a href="https://www.npmjs.com/package/data-chart"><img alt="NPM version" src="https://img.shields.io/npm/v/data-chart.svg?style=for-the-badge&labelColor=000000"></a>
@@ -41,7 +44,8 @@ import 'data-chart';
 </table>
 ```
 
-- Visit the [Documentation](https://ryo-manba.github.io/data-chart/) to view the full API reference.
+- Visit the [Documentation](https://ryo-manba.github.io/data-chart/docs/getting-started/) to view the full API reference.
+- Try the [Playground](https://ryo-manba.github.io/data-chart/playground/) to experiment with charts interactively.
 
 ## Contributing
 

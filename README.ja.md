@@ -1,4 +1,7 @@
 <div align="center">
+
+<a href="https://ryo-manba.github.io/data-chart/ja/"><img src="https://raw.githubusercontent.com/ryo-manba/data-chart/main/docs/public/og-image.png" alt="data-chart" width="100%" /></a>
+
   <h1>data-chart</h1>
 
 <a href="https://www.npmjs.com/package/data-chart"><img alt="NPM version" src="https://img.shields.io/npm/v/data-chart.svg?style=for-the-badge&labelColor=000000"></a>
@@ -43,7 +46,8 @@ import 'data-chart';
 </table>
 ```
 
-- [ドキュメント](https://ryo-manba.github.io/data-chart/)で完全な API リファレンスをご覧ください。
+- [ドキュメント](https://ryo-manba.github.io/data-chart/ja/docs/getting-started/)で完全な API リファレンスをご覧ください。
+- [Playground](https://ryo-manba.github.io/data-chart/ja/playground/) でチャートをインタラクティブに試せます。
 
 ## Contributing
 
