@@ -169,48 +169,6 @@ describe('events', () => {
   });
 });
 
-describe('source toggle', () => {
-  it('creates toggle button when data-chart-source is set', () => {
-    const table = createTable('bar', { 'data-chart-source': '' });
-    api.render(table);
-    const btn = document.querySelector('.data-chart-source-toggle');
-    expect(btn).not.toBeNull();
-    expect(btn!.textContent).toBe('Show table');
-  });
-
-  it('toggles aria-expanded on click', () => {
-    const table = createTable('bar', { 'data-chart-source': '' });
-    api.render(table);
-    const btn = document.querySelector('.data-chart-source-toggle') as HTMLButtonElement;
-    expect(btn.getAttribute('aria-expanded')).toBe('false');
-    btn.click();
-    expect(btn.getAttribute('aria-expanded')).toBe('true');
-    btn.click();
-    expect(btn.getAttribute('aria-expanded')).toBe('false');
-  });
-
-  it('changes button text on toggle', () => {
-    const table = createTable('bar', { 'data-chart-source': '' });
-    api.render(table);
-    const btn = document.querySelector('.data-chart-source-toggle') as HTMLButtonElement;
-    expect(btn.textContent).toBe('Show table');
-    btn.click();
-    expect(btn.textContent).toBe('Hide table');
-    btn.click();
-    expect(btn.textContent).toBe('Show table');
-  });
-
-  it('toggles source-visible class on table', () => {
-    const table = createTable('bar', { 'data-chart-source': '' });
-    api.render(table);
-    const btn = document.querySelector('.data-chart-source-toggle') as HTMLButtonElement;
-    expect(table.classList.contains('data-chart-source-visible')).toBe(false);
-    btn.click();
-    expect(table.classList.contains('data-chart-source-visible')).toBe(true);
-    btn.click();
-    expect(table.classList.contains('data-chart-source-visible')).toBe(false);
-  });
-});
 
 describe('injectStyles', () => {
   it('inserts style element', () => {

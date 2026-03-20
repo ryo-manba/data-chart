@@ -36,8 +36,7 @@ export interface DataChartAttributes {
   'data-chart-horizontal'?: string | boolean;
   /** Render as stacked bar chart */
   'data-chart-stacked'?: string | boolean;
-  /** Show source table toggle */
-  'data-chart-source'?: string | boolean;
+
   /** Enable entrance animations */
   'data-chart-animate'?: string | boolean;
   /** Animation duration per element in ms (default: 600) */

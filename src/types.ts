@@ -20,7 +20,7 @@ export interface ChartConfig {
   radius: number;
   horizontal: boolean;
   stacked: boolean;
-  source: boolean;
+
   animate: boolean;
   animDuration: number;
   animStagger: number;

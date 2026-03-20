@@ -28,7 +28,7 @@ function makeConfig(overrides?: Partial<ChartConfig>): ChartConfig {
     radius: 3,
     horizontal: false,
     stacked: false,
-    source: false,
+
     animate: false,
     animDuration: 600,
     animStagger: 60,

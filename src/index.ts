@@ -146,7 +146,7 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
     radius: parseInt(table.getAttribute('data-chart-radius') ?? '3', 10),
     horizontal: table.hasAttribute('data-chart-horizontal'),
     stacked: table.hasAttribute('data-chart-stacked'),
-    source: table.hasAttribute('data-chart-source'),
+
     animate: table.hasAttribute('data-chart-animate'),
     animDuration: parseInt(table.getAttribute('data-chart-animate-duration') ?? '600', 10),
     animStagger: parseInt(table.getAttribute('data-chart-animate-stagger') ?? '60', 10),
@@ -173,23 +173,6 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
   // Start transitions AFTER DOM insertion
   if (animTargets) startAnimations(animTargets);
 
-  if (cfg.source) {
-    const id = table.id || `dc-${Math.random().toString(36).slice(2, 9)}`;
-    if (!table.id) table.id = id;
-    const b = document.createElement('button');
-    b.className = 'data-chart-source-toggle';
-    b.setAttribute('aria-expanded', 'false');
-    b.setAttribute('aria-controls', id);
-    b.textContent = 'Show table';
-    b.addEventListener('click', () => {
-      const e = b.getAttribute('aria-expanded') === 'true';
-      b.setAttribute('aria-expanded', String(!e));
-      b.textContent = e ? 'Show table' : 'Hide table';
-      table.classList.toggle('data-chart-source-visible', !e);
-    });
-    ct.appendChild(b);
-  }
-
   table.dispatchEvent(new CustomEvent('datachart:rendered', { detail: { svg, data } }));
   return svg;
 }
@@ -197,7 +180,7 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
 function destroy(t: HTMLTableElement): void {
   const c = t.closest('.data-chart-container');
   if (!c) return;
-  t.classList.remove('data-chart-rendered', 'data-chart-source-visible');
+  t.classList.remove('data-chart-rendered');
   t.removeAttribute('aria-hidden');
   c.parentNode?.insertBefore(t, c);
   c.remove();
