@@ -11,7 +11,7 @@ import Footer from "../../components/Footer.astro";
     <section class="px-6 pt-28 pb-10 max-w-5xl mx-auto text-center">
       <h1 class="text-4xl font-heading font-extrabold tracking-tight text-text">Playground</h1>
       <p class="mt-4 text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-        チャートタイプを選んでオプションをカスタマイズ。テーブルデータを編集してリアルタイムで変化を確認できます。
+        チャートタイプを選んでオプションをカスタマイズ。リアルタイムで変化を確認できます。
       </p>
     </section>
 
@@ -97,7 +97,9 @@ import Footer from "../../components/Footer.astro";
             <div class="mb-5">
               <label class="text-sm text-text-secondary mb-2 block">グリッド</label>
               <div class="flex flex-wrap gap-2" id="grid-group">
-                <button type="button" class="pill-btn active" data-group="grid" data-value="y">y</button>
+                <button type="button" class="pill-btn active" data-group="grid" data-value="y">horizontal</button>
+                <button type="button" class="pill-btn" data-group="grid" data-value="x">vertical</button>
+                <button type="button" class="pill-btn" data-group="grid" data-value="both">both</button>
                 <button type="button" class="pill-btn" data-group="grid" data-value="none">none</button>
               </div>
             </div>
@@ -144,7 +146,7 @@ import Footer from "../../components/Footer.astro";
 
             <!-- Animate toggle -->
             <div class="flex items-center gap-3 mb-4">
-              <label class="text-sm text-text-secondary">アニメーション</label>
+              <label class="text-sm text-text-secondary">有効にする</label>
               <input
                 type="checkbox"
                 id="animate-input"

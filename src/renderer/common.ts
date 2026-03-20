@@ -22,11 +22,11 @@ export function createSvg(w: number, h: number): SVGSVGElement {
 export function computeLayout(c: ChartConfig, sc: number): ChartLayout {
   const w = 500,
     legendBottom = c.legend === "bottom" && sc > 1,
-    h = c.height + (legendBottom ? 32 : 0),
+    h = c.height + (legendBottom ? 24 : 0),
     pt = 20 + (c.legend === "top" && sc > 1 ? 28 : 0),
     pl = 46,
     pr = 20,
-    pb = 36 + (legendBottom ? 32 : 0);
+    pb = 36 + (legendBottom ? 24 : 0);
   return {
     width: w,
     height: h,
