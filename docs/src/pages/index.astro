@@ -42,6 +42,102 @@ import Footer from "../components/Footer.astro";
     </div>
   </section>
 
+  <!-- Live Demo -->
+  <section class="py-20 px-4 sm:px-6 border-t border-border">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-xs font-semibold tracking-widest text-text-muted uppercase mb-4">Live Demo</p>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-4">
+        See it in action
+      </h2>
+      <p class="text-center text-text-secondary mb-12 max-w-xl mx-auto">
+        Real charts rendered from plain HTML tables. Add <code class="bg-code-bg px-1.5 py-0.5 rounded text-xs font-mono text-accent-readable">data-chart-animate</code> for entrance animations.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Bar chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Bar Chart</h3>
+            <code class="chart-tag">data-chart="bar"</code>
+          </div>
+          <div class="chart-demo chart-demo--cartesian">
+            <table data-chart="bar" data-chart-animate>
+              <caption>Quarterly Revenue</caption>
+              <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
+              <tbody>
+                <tr><td>Q1</td><td>420</td><td>180</td></tr>
+                <tr><td>Q2</td><td>580</td><td>240</td></tr>
+                <tr><td>Q3</td><td>510</td><td>210</td></tr>
+                <tr><td>Q4</td><td>690</td><td>310</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Line chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Line Chart</h3>
+            <code class="chart-tag">data-chart="line"</code>
+          </div>
+          <div class="chart-demo chart-demo--cartesian">
+            <table data-chart="line" data-chart-animate>
+              <caption>Monthly Users</caption>
+              <thead><tr><th>Month</th><th>Users</th></tr></thead>
+              <tbody>
+                <tr><td>Jan</td><td>1200</td></tr>
+                <tr><td>Feb</td><td>1800</td></tr>
+                <tr><td>Mar</td><td>1500</td></tr>
+                <tr><td>Apr</td><td>2200</td></tr>
+                <tr><td>May</td><td>2800</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pie chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Pie Chart</h3>
+            <code class="chart-tag">data-chart="pie"</code>
+          </div>
+          <div class="chart-demo chart-demo--radial">
+            <table data-chart="pie" data-chart-animate>
+              <caption>Language Usage</caption>
+              <thead><tr><th>Language</th><th>Share</th></tr></thead>
+              <tbody>
+                <tr><td>TypeScript</td><td>38</td></tr>
+                <tr><td>Python</td><td>28</td></tr>
+                <tr><td>Go</td><td>18</td></tr>
+                <tr><td>Rust</td><td>16</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Donut chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Donut Chart</h3>
+            <code class="chart-tag">data-chart="donut"</code>
+          </div>
+          <div class="chart-demo chart-demo--radial">
+            <table data-chart="donut" data-chart-animate>
+              <caption>Budget Allocation</caption>
+              <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+              <tbody>
+                <tr><td>Engineering</td><td>45</td></tr>
+                <tr><td>Marketing</td><td>25</td></tr>
+                <tr><td>Sales</td><td>20</td></tr>
+                <tr><td>Support</td><td>10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Chart Showcase -->
   <section class="py-20 px-4 sm:px-6 border-t border-border">
     <div class="max-w-5xl mx-auto">
@@ -201,102 +297,6 @@ import Footer from "../components/Footer.astro";
     </div>
   </section>
 
-  <!-- Live Demo -->
-  <section class="py-20 px-4 sm:px-6 border-t border-border">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-center text-xs font-semibold tracking-widest text-text-muted uppercase mb-4">Live Demo</p>
-      <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-4">
-        See it in action
-      </h2>
-      <p class="text-center text-text-secondary mb-12 max-w-xl mx-auto">
-        Real charts rendered from plain HTML tables. Add <code class="bg-code-bg px-1.5 py-0.5 rounded text-xs font-mono text-accent-readable">data-chart-animate</code> for entrance animations.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Bar chart example -->
-        <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-heading font-semibold">Bar Chart</h3>
-            <code class="chart-tag">data-chart="bar"</code>
-          </div>
-          <div class="chart-demo">
-            <table data-chart="bar" data-chart-animate>
-              <caption>Quarterly Revenue</caption>
-              <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
-              <tbody>
-                <tr><td>Q1</td><td>420</td><td>180</td></tr>
-                <tr><td>Q2</td><td>580</td><td>240</td></tr>
-                <tr><td>Q3</td><td>510</td><td>210</td></tr>
-                <tr><td>Q4</td><td>690</td><td>310</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Line chart example -->
-        <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-heading font-semibold">Line Chart</h3>
-            <code class="chart-tag">data-chart="line"</code>
-          </div>
-          <div class="chart-demo">
-            <table data-chart="line" data-chart-animate>
-              <caption>Monthly Users</caption>
-              <thead><tr><th>Month</th><th>Users</th></tr></thead>
-              <tbody>
-                <tr><td>Jan</td><td>1200</td></tr>
-                <tr><td>Feb</td><td>1800</td></tr>
-                <tr><td>Mar</td><td>1500</td></tr>
-                <tr><td>Apr</td><td>2200</td></tr>
-                <tr><td>May</td><td>2800</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Pie chart example -->
-        <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-heading font-semibold">Pie Chart</h3>
-            <code class="chart-tag">data-chart="pie"</code>
-          </div>
-          <div class="chart-demo">
-            <table data-chart="pie" data-chart-animate>
-              <caption>Browser Share</caption>
-              <thead><tr><th>Browser</th><th>Share</th></tr></thead>
-              <tbody>
-                <tr><td>Chrome</td><td>65</td></tr>
-                <tr><td>Safari</td><td>19</td></tr>
-                <tr><td>Firefox</td><td>10</td></tr>
-                <tr><td>Other</td><td>6</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Donut chart example -->
-        <div class="glass-card p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-heading font-semibold">Donut Chart</h3>
-            <code class="chart-tag">data-chart="donut"</code>
-          </div>
-          <div class="chart-demo">
-            <table data-chart="donut" data-chart-animate>
-              <caption>Budget Allocation</caption>
-              <thead><tr><th>Category</th><th>Budget</th></tr></thead>
-              <tbody>
-                <tr><td>Engineering</td><td>45</td></tr>
-                <tr><td>Marketing</td><td>25</td></tr>
-                <tr><td>Sales</td><td>20</td></tr>
-                <tr><td>Support</td><td>10</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Quick Start -->
   <section class="py-20 px-4 sm:px-6 border-t border-border">
     <div class="max-w-3xl mx-auto">
@@ -409,6 +409,14 @@ import Footer from "../components/Footer.astro";
   .chart-showcase-card:hover .chart-tag {
     background: rgba(56, 189, 248, 0.1);
     color: var(--color-accent-readable);
+  }
+
+  /* Reserve space for charts before JS renders them (prevents layout shift) */
+  .chart-demo--cartesian {
+    aspect-ratio: 500 / 220;
+  }
+  .chart-demo--radial {
+    aspect-ratio: 300 / 280;
   }
 </style>
 

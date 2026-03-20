@@ -13,20 +13,30 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <!-- Live Examples -->
   <h2>Live Examples</h2>
-  <p>Click <strong>Replay</strong> to re-run any animation.</p>
+  <p>Click <strong>Replay</strong> to re-run any animation. Switch to <strong>Code</strong> to see the HTML source.</p>
 
   <div class="demo-grid">
     <!-- Bar Chart -->
     <div class="demo-card">
       <div class="demo-header">
         <h3>Bar Chart</h3>
-        <button type="button" class="replay-btn" aria-label="Replay animation">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Bars grow from the baseline with staggered delays</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="bar" data-chart-animate>
           <caption>Quarterly Revenue</caption>
           <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
@@ -38,19 +48,30 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <!-- Line Chart -->
     <div class="demo-card">
       <div class="demo-header">
         <h3>Line Chart</h3>
-        <button type="button" class="replay-btn" aria-label="Replay animation">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Line draws from left to right, then dots fade in</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="line" data-chart-animate>
           <caption>Monthly Users</caption>
           <thead><tr><th>Month</th><th>Users</th><th>Active</th></tr></thead>
@@ -63,19 +84,30 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <!-- Area Chart -->
     <div class="demo-card">
       <div class="demo-header">
         <h3>Area Chart</h3>
-        <button type="button" class="replay-btn" aria-label="Replay animation">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Line draws across, then the area fill fades in</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="area" data-chart-animate>
           <caption>Weekly Visitors</caption>
           <thead><tr><th>Week</th><th>Visitors</th></tr></thead>
@@ -89,66 +121,98 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <!-- Pie & Donut side by side -->
     <div class="demo-card demo-half">
       <div class="demo-header">
         <h3>Pie</h3>
-        <button type="button" class="replay-btn" aria-label="Replay">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Slices scale in one by one</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="pie" data-chart-animate>
-          <caption>Browser Share</caption>
-          <thead><tr><th>Browser</th><th>Share</th></tr></thead>
+          <caption>OS Share</caption>
+          <thead><tr><th>OS</th><th>Share</th></tr></thead>
           <tbody>
-            <tr><td>Chrome</td><td>65</td></tr>
-            <tr><td>Safari</td><td>19</td></tr>
-            <tr><td>Firefox</td><td>10</td></tr>
-            <tr><td>Other</td><td>6</td></tr>
+            <tr><td>Linux</td><td>40</td></tr>
+            <tr><td>macOS</td><td>32</td></tr>
+            <tr><td>Win</td><td>28</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <div class="demo-card demo-half">
       <div class="demo-header">
         <h3>Donut</h3>
-        <button type="button" class="replay-btn" aria-label="Replay">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Segments scale in with staggered delay</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="donut" data-chart-animate>
-          <caption>Budget Allocation</caption>
-          <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+          <caption>Task Status</caption>
+          <thead><tr><th>Status</th><th>Count</th></tr></thead>
           <tbody>
-            <tr><td>Engineering</td><td>45</td></tr>
-            <tr><td>Marketing</td><td>25</td></tr>
-            <tr><td>Sales</td><td>20</td></tr>
-            <tr><td>Support</td><td>10</td></tr>
+            <tr><td>Done</td><td>45</td></tr>
+            <tr><td>Active</td><td>30</td></tr>
+            <tr><td>Review</td><td>15</td></tr>
+            <tr><td>Blocked</td><td>10</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <!-- Stacked Bar -->
     <div class="demo-card">
       <div class="demo-header">
         <h3>Stacked Bar</h3>
-        <button type="button" class="replay-btn" aria-label="Replay">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Stacked segments grow from baseline together</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="bar" data-chart-stacked data-chart-animate>
           <caption>Device Traffic</caption>
           <thead><tr><th>Q</th><th>Desktop</th><th>Mobile</th><th>Tablet</th></tr></thead>
@@ -160,19 +224,30 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
 
     <!-- Horizontal Bar -->
     <div class="demo-card">
       <div class="demo-header">
         <h3>Horizontal Bar</h3>
-        <button type="button" class="replay-btn" aria-label="Replay">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
-          Replay
-        </button>
+        <div class="demo-actions">
+          <div class="demo-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+            <button type="button" class="tab-btn" data-tab="code">Code</button>
+          </div>
+          <button type="button" class="action-btn copy-btn" hidden aria-label="Copy code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button type="button" class="action-btn replay-btn" aria-label="Replay animation">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
       <p class="demo-desc">Horizontal bars grow from left with stagger</p>
-      <div class="demo-chart">
+      <div class="demo-chart" data-panel="preview">
         <table data-chart="bar" data-chart-horizontal data-chart-animate>
           <caption>Language Popularity</caption>
           <thead><tr><th>Language</th><th>Users</th></tr></thead>
@@ -184,6 +259,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
           </tbody>
         </table>
       </div>
+      <div class="demo-code" data-panel="code" hidden><pre><code></code></pre></div>
     </div>
   </div>
 
@@ -257,10 +333,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
   <h2>Reduced Motion</h2>
   <p>Animations are automatically disabled when <code>prefers-reduced-motion: reduce</code> is set. No additional configuration needed. Charts render instantly in their final state.</p>
 
-  <h2>Replay via JavaScript</h2>
-  <p>Use the <code>refresh()</code> API to replay animations:</p>
-  <pre><code>const table = document.querySelector('table[data-chart]');
-window.dataChart.refresh(table);</code></pre>
 </DocsLayout>
 
 <style>
@@ -302,36 +374,112 @@ window.dataChart.refresh(table);</code></pre>
   .demo-header h3 {
     margin: 0;
     font-size: 0.95rem;
+    white-space: nowrap;
   }
 
-  .replay-btn {
+  .demo-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .demo-tabs {
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+
+  .tab-btn {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    font-family: var(--font-sans);
+  }
+
+  .tab-btn:not(:last-child) {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .tab-btn.active {
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+  }
+
+  .tab-btn:hover:not(.active) {
+    color: var(--color-text-secondary);
+  }
+
+  .action-btn {
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--color-text-secondary);
     cursor: pointer;
     background: none;
     border: none;
     padding: 0.25rem 0.5rem;
     border-radius: 0.375rem;
-    transition: color 0.15s;
+    transition: color 0.15s, opacity 0.15s;
+    min-width: 5rem;
+    justify-content: center;
+    white-space: nowrap;
   }
 
-  .replay-btn:hover {
+  .action-btn:hover {
     color: var(--color-accent-readable);
+  }
+
+  .action-btn[hidden] {
+    visibility: hidden;
   }
 
   .demo-desc {
     margin: 0;
     padding: 0.5rem 1rem 0;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--color-text-secondary);
   }
 
   .demo-chart {
     padding: 1rem;
   }
+
+  .demo-chart :global(.data-chart-svg) {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .demo-code {
+    padding: 1rem;
+  }
+
+  .demo-code pre {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-border);
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .demo-code code {
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+  }
+
+  /* Syntax highlight (global: spans are injected by JS) */
+  .demo-code :global(.hl-tag) { color: var(--color-accent); }
+  .demo-code :global(.hl-attr) { color: var(--color-accent-readable); }
+  .demo-code :global(.hl-val) { color: #34d399; }
 
   .ref-table-wrapper {
     overflow-x: auto;
@@ -368,7 +516,121 @@ window.dataChart.refresh(table);</code></pre>
 <script>
   import dataChart from '../../../../src/index.ts';
 
-  function initReplay() {
+  function formatHTML(html: string): string {
+    let formatted = '';
+    let indent = 0;
+    const tags = html.replace(/>\s*</g, '>\n<').split('\n');
+    for (const tag of tags) {
+      if (tag.match(/^<\/(thead|tbody|tr|table|caption)/)) indent--;
+      formatted += '  '.repeat(Math.max(indent, 0)) + tag.trim() + '\n';
+      if (tag.match(/^<(thead|tbody|tr|table|caption)/) && !tag.match(/\/>/)) indent++;
+    }
+    return formatted.trim();
+  }
+
+  function highlightHTML(source: string): string {
+    // Process character by character to avoid regex interference
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    let result = '';
+    let i = 0;
+    while (i < source.length) {
+      if (source[i] === '<') {
+        // Find the end of the tag
+        const end = source.indexOf('>', i);
+        if (end === -1) { result += esc(source.slice(i)); break; }
+        const tag = source.slice(i + 1, end);
+        // Parse tag: name and attributes
+        const closing = tag.startsWith('/');
+        const inner = closing ? tag.slice(1) : tag;
+        const spaceIdx = inner.indexOf(' ');
+        const tagName = spaceIdx === -1 ? inner : inner.slice(0, spaceIdx);
+        const attrsStr = spaceIdx === -1 ? '' : inner.slice(spaceIdx);
+        // Build highlighted tag
+        result += '&lt;';
+        if (closing) result += '/';
+        result += `<span class="hl-tag">${esc(tagName)}</span>`;
+        if (attrsStr) {
+          // Highlight attributes
+          result += attrsStr.replace(/([\w-]+)="([^"]*)"/g,
+            (_, name, val) => `<span class="hl-attr">${esc(name)}</span>=<span class="hl-val">"${esc(val)}"</span>`)
+            .replace(/( )([\w-]+-[\w-]+)(?=[ >]|$)/g,
+              (_, sp, name) => `${sp}<span class="hl-attr">${esc(name)}</span>`);
+        }
+        result += '&gt;';
+        i = end + 1;
+      } else {
+        // Text content until next tag
+        const next = source.indexOf('<', i);
+        const text = next === -1 ? source.slice(i) : source.slice(i, next);
+        result += esc(text);
+        i = next === -1 ? source.length : next;
+      }
+    }
+    return result;
+  }
+
+  function init() {
+    const cards = document.querySelectorAll('.demo-card');
+
+    for (const card of cards) {
+      const table = card.querySelector('table[data-chart]');
+      if (!table) continue;
+
+      const codeEl = card.querySelector('.demo-code code');
+      if (codeEl && !codeEl.innerHTML.includes('hl-tag')) {
+        const clone = table.cloneNode(true) as HTMLTableElement;
+        clone.classList.remove('data-chart-rendered');
+        clone.removeAttribute('aria-hidden');
+        for (const el of [clone, ...clone.querySelectorAll('*')]) {
+          for (const attr of [...el.attributes]) {
+            if (attr.name.startsWith('data-astro') || attr.name === 'class' && !attr.value) {
+              el.removeAttribute(attr.name);
+            }
+          }
+        }
+        const source = formatHTML(clone.outerHTML)
+          .replace(/( data-chart-(?:animate|stacked|horizontal))=""/g, '$1');
+        codeEl.innerHTML = highlightHTML(source);
+      }
+
+      // Tab switching
+      const tabs = card.querySelectorAll('.tab-btn');
+      const previewPanel = card.querySelector('[data-panel="preview"]');
+      const codePanel = card.querySelector('[data-panel="code"]');
+      const replayBtn = card.querySelector('.replay-btn') as HTMLElement | null;
+      const copyBtn = card.querySelector('.copy-btn') as HTMLElement | null;
+
+      for (const tab of tabs) {
+        tab.addEventListener('click', () => {
+          const target = (tab as HTMLElement).dataset.tab;
+          for (const t of tabs) t.classList.toggle('active', t === tab);
+          if (target === 'code') {
+            previewPanel?.setAttribute('hidden', '');
+            codePanel?.removeAttribute('hidden');
+            replayBtn?.setAttribute('hidden', '');
+            copyBtn?.removeAttribute('hidden');
+          } else {
+            codePanel?.setAttribute('hidden', '');
+            previewPanel?.removeAttribute('hidden');
+            copyBtn?.setAttribute('hidden', '');
+            replayBtn?.removeAttribute('hidden');
+          }
+        });
+      }
+
+      // Copy button
+      copyBtn?.addEventListener('click', async () => {
+        const text = card.querySelector('.demo-code code')?.textContent ?? '';
+        await navigator.clipboard.writeText(text);
+        const span = copyBtn.lastChild;
+        if (span) {
+          span.textContent = ' Copied!';
+          setTimeout(() => { span.textContent = '\n            Copy\n          '; }, 1500);
+        }
+      });
+    }
+
+    // Replay buttons
     document.querySelectorAll('.replay-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const card = btn.closest('.demo-card');
@@ -379,6 +641,6 @@ window.dataChart.refresh(table);</code></pre>
     });
   }
 
-  initReplay();
-  document.addEventListener('astro:after-swap', initReplay);
+  init();
+  document.addEventListener('astro:after-swap', init);
 </script>

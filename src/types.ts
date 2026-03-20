@@ -21,7 +21,6 @@ export interface ChartConfig {
   horizontal: boolean;
   stacked: boolean;
   source: boolean;
-  debug: boolean;
   animate: boolean;
   animDuration: number;
   animStagger: number;

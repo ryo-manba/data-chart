@@ -17,16 +17,23 @@ function raf2(fn: () => void): void {
   requestAnimationFrame(() => { requestAnimationFrame(fn); });
 }
 
-function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+interface AnimTarget {
+  el: SVGElement;
+  attrs?: Record<string, string>;
+  style?: Record<string, string>;
+}
+
+function setupAnimations(svg: SVGSVGElement, cfg: ChartConfig): AnimTarget[] | null {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return null;
   svg.classList.add('dc-anim');
 
-  const d = cfg.animDuration; // duration per element (ms)
-  const sg = cfg.animStagger; // stagger between elements (ms)
+  const d = cfg.animDuration;
+  const sg = cfg.animStagger;
   const bars = svg.querySelectorAll('.data-chart-bar');
   const lines = svg.querySelectorAll('.data-chart-line');
   const dots = svg.querySelectorAll('.data-chart-dot');
   const slices = svg.querySelectorAll('.data-chart-slice');
+  const targets: AnimTarget[] = [];
 
   if (cfg.horizontal) {
     bars.forEach((el, i) => {
@@ -34,7 +41,7 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
       const finalW = rect.getAttribute('width') ?? '0';
       rect.setAttribute('width', '0');
       rect.style.transition = `width ${d}ms ease-out ${i * sg}ms`;
-      raf2(() => { rect.setAttribute('width', finalW); });
+      targets.push({ el: rect, attrs: { width: finalW } });
     });
   } else if (bars.length > 0) {
     const barData: Array<{ rect: SVGRectElement; finalH: number; finalY: number; x: string }> = [];
@@ -55,7 +62,7 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
         list.push(b);
         colMap.set(b.x, list);
       }
-      const segDur = Math.round(d / 2); // duration per stacked segment
+      const segDur = Math.round(d / 2);
       let colIdx = 0;
       for (const [, segs] of colMap) {
         segs.sort((a, b) => b.finalY - a.finalY);
@@ -64,10 +71,7 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
           b.rect.setAttribute('height', '0');
           b.rect.setAttribute('y', String(b.finalY + b.finalH));
           b.rect.style.transition = `height ${segDur}ms ease-out ${delay}ms, y ${segDur}ms ease-out ${delay}ms`;
-          raf2(() => {
-            b.rect.setAttribute('height', String(b.finalH));
-            b.rect.setAttribute('y', String(b.finalY));
-          });
+          targets.push({ el: b.rect, attrs: { height: String(b.finalH), y: String(b.finalY) } });
         });
         colIdx++;
       }
@@ -76,10 +80,7 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
         b.rect.setAttribute('height', '0');
         b.rect.setAttribute('y', String(b.finalY + b.finalH));
         b.rect.style.transition = `height ${d}ms ease-out ${i * sg}ms, y ${d}ms ease-out ${i * sg}ms`;
-        raf2(() => {
-          b.rect.setAttribute('height', String(b.finalH));
-          b.rect.setAttribute('y', String(b.finalY));
-        });
+        targets.push({ el: b.rect, attrs: { height: String(b.finalH), y: String(b.finalY) } });
       });
     }
   }
@@ -92,7 +93,7 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
     path.style.strokeDasharray = '1';
     path.style.strokeDashoffset = '1';
     path.style.transition = `stroke-dashoffset ${lineDur}ms ease-out`;
-    raf2(() => { path.style.strokeDashoffset = '0'; });
+    targets.push({ el: path, style: { strokeDashoffset: '0' } });
   });
 
   // Dots: fade in after line draws
@@ -110,12 +111,20 @@ function applyAnimations(svg: SVGSVGElement, cfg: ChartConfig): void {
       s.style.transform = 'scale(0.3)';
       s.style.opacity = '0';
       s.style.transition = `transform ${d}ms cubic-bezier(0.25,0.46,0.45,0.94) ${i * sg}ms, opacity ${Math.round(d / 2)}ms ease-out ${i * sg}ms`;
-      raf2(() => {
-        s.style.transform = 'scale(1)';
-        s.style.opacity = '0.85';
-      });
+      targets.push({ el: s, style: { transform: 'scale(1)', opacity: '0.85' } });
     });
   }
+
+  return targets;
+}
+
+function startAnimations(targets: AnimTarget[]): void {
+  raf2(() => {
+    for (const t of targets) {
+      if (t.attrs) for (const [k, v] of Object.entries(t.attrs)) t.el.setAttribute(k, v);
+      if (t.style) for (const [k, v] of Object.entries(t.style)) (t.el.style as unknown as Record<string, string>)[k] = v;
+    }
+  });
 }
 
 function renderChart(table: HTMLTableElement): SVGSVGElement {
@@ -138,7 +147,6 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
     horizontal: table.hasAttribute('data-chart-horizontal'),
     stacked: table.hasAttribute('data-chart-stacked'),
     source: table.hasAttribute('data-chart-source'),
-    debug: false,
     animate: table.hasAttribute('data-chart-animate'),
     animDuration: parseInt(table.getAttribute('data-chart-animate-duration') ?? '600', 10),
     animStagger: parseInt(table.getAttribute('data-chart-animate-stagger') ?? '60', 10),
@@ -151,7 +159,8 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
   svg.setAttribute('aria-label', data.caption ?? `${type} chart: ${data.headers.join(', ')}`);
   table.setAttribute('aria-hidden', 'true');
 
-  if (cfg.animate) applyAnimations(svg, cfg);
+  // Setup animation initial state BEFORE adding to DOM (prevents flash of final state)
+  const animTargets = cfg.animate ? setupAnimations(svg, cfg) : null;
 
   const ct = document.createElement('div');
   ct.className = 'data-chart-container';
@@ -160,6 +169,9 @@ function renderChart(table: HTMLTableElement): SVGSVGElement {
   table.parentNode?.insertBefore(ct, table);
   ct.appendChild(table);
   ct.appendChild(svg);
+
+  // Start transitions AFTER DOM insertion
+  if (animTargets) startAnimations(animTargets);
 
   if (cfg.source) {
     const id = table.id || `dc-${Math.random().toString(36).slice(2, 9)}`;

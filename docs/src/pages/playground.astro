@@ -390,6 +390,18 @@ import Footer from "../components/Footer.astro";
       updateCode();
     }
 
+    function formatHTML(html: string): string {
+      let formatted = '';
+      let indent = 0;
+      const tags = html.replace(/>\s*</g, '>\n<').split('\n');
+      for (const tag of tags) {
+        if (tag.match(/^<\/(thead|tbody|tr|table)/)) indent--;
+        formatted += '  '.repeat(Math.max(indent, 0)) + tag.trim() + '\n';
+        if (tag.match(/^<(thead|tbody|tr|table)/) && !tag.match(/\/>/)) indent++;
+      }
+      return formatted.trim();
+    }
+
     function generateTableHTML(): string {
       const isHorizontalBar = currentChartType === 'horizontal-bar';
       const chartAttr = isHorizontalBar ? 'bar' : currentChartType;
@@ -406,7 +418,8 @@ import Footer from "../components/Footer.astro";
         if (currentStagger !== 60) attrs += ` data-chart-animate-stagger="${currentStagger}"`;
       }
 
-      return `<table ${attrs}>\n${table.innerHTML.trim()}\n</table>`;
+      const raw = `<table ${attrs}>\n${table.innerHTML.trim()}\n</table>`;
+      return formatHTML(raw);
     }
 
     function updateCode(): void {

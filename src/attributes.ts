@@ -44,8 +44,6 @@ export interface DataChartAttributes {
   'data-chart-animate-duration'?: string;
   /** Stagger delay between elements in ms (default: 60) */
   'data-chart-animate-stagger'?: string;
-  /** Enable debug logging */
-  'data-chart-debug'?: string | boolean;
 }
 
 // React JSX support
