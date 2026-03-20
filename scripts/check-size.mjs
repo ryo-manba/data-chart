@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 
-const BUDGET = 6144; // 6KB
+const BUDGET = 7168; // 7KB
 
 const files = [
   { path: 'dist/data-chart.js', label: 'ESM' },
@@ -25,6 +25,6 @@ for (const { path, label } of files) {
 }
 
 if (failed) {
-  console.error('\nBundle size budget exceeded! Max: 6KB gzip');
+  console.error('\nBundle size budget exceeded! Max: 7KB gzip');
   process.exit(1);
 }

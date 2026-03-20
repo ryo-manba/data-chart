@@ -9,7 +9,7 @@
 
 ## Getting Started
 
-Add a script tag. Write attributes. Your tables become charts. Zero dependencies, under 6KB gzipped.
+Add a script tag. Write attributes. Your tables become charts. Zero dependencies, under 7KB gzipped.
 
 ### npm
 

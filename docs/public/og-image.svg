@@ -90,7 +90,7 @@
   <g transform="translate(80, 360)">
     <g>
       <rect x="0" y="0" width="108" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
-      <text x="54" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Under 6KB</text>
+      <text x="54" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#7dd3fc" text-anchor="middle">Under 7KB</text>
     </g>
     <g transform="translate(120, 0)">
       <rect x="0" y="0" width="116" height="32" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>

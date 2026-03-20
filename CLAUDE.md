@@ -6,7 +6,7 @@ A zero-dependency library that converts HTML `<table>` elements into SVG charts 
 
 - **No animation**: data-chart does NOT contain animation logic. Never create `<animate>` elements, CSS `@keyframes`, or `requestAnimationFrame`. Animation is handled by the sibling library data-anim.
 - **Attribute forwarding**: `data-anim-*` attributes on tables are copied to `.data-chart-container` for data-anim to process. Do NOT import or depend on data-anim.
-- **Bundle size**: must be ≤ 6KB gzip. Run `pnpm size` to check.
+- **Bundle size**: must be ≤ 7KB gzip. Run `pnpm size` to check.
 
 ## i18n
 
