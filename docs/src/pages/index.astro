@@ -103,13 +103,12 @@ import Footer from "../components/Footer.astro";
           </div>
           <div class="chart-demo chart-demo--radial">
             <table data-chart="pie" data-chart-animate>
-              <caption>Language Usage</caption>
-              <thead><tr><th>Language</th><th>Share</th></tr></thead>
+              <caption>OS Share</caption>
+              <thead><tr><th>OS</th><th>Share</th></tr></thead>
               <tbody>
-                <tr><td>TypeScript</td><td>38</td></tr>
-                <tr><td>Python</td><td>28</td></tr>
-                <tr><td>Go</td><td>18</td></tr>
-                <tr><td>Rust</td><td>16</td></tr>
+                <tr><td>Linux</td><td>40</td></tr>
+                <tr><td>macOS</td><td>32</td></tr>
+                <tr><td>Win</td><td>28</td></tr>
               </tbody>
             </table>
           </div>
@@ -123,17 +122,22 @@ import Footer from "../components/Footer.astro";
           </div>
           <div class="chart-demo chart-demo--radial">
             <table data-chart="donut" data-chart-animate>
-              <caption>Budget Allocation</caption>
-              <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+              <caption>Task Status</caption>
+              <thead><tr><th>Status</th><th>Count</th></tr></thead>
               <tbody>
-                <tr><td>Engineering</td><td>45</td></tr>
-                <tr><td>Marketing</td><td>25</td></tr>
-                <tr><td>Sales</td><td>20</td></tr>
-                <tr><td>Support</td><td>10</td></tr>
+                <tr><td>Done</td><td>50</td></tr>
+                <tr><td>Active</td><td>30</td></tr>
+                <tr><td>Todo</td><td>20</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}docs/animation/`} class="text-accent-readable hover:text-[#e0f2fe] font-semibold text-lg">
+          See all animations &rarr;
+        </a>
       </div>
     </div>
   </section>
@@ -149,7 +153,7 @@ import Footer from "../components/Footer.astro";
         From simple bars to detailed donuts. Every chart is responsive, accessible, and dark-mode ready.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <!-- Bar -->
         <div class="glass-card overflow-hidden chart-showcase-card">
           <div class="chart-preview">
@@ -194,17 +198,17 @@ import Footer from "../components/Footer.astro";
           <div class="chart-preview">
             <svg width="130" height="90" viewBox="0 0 130 90" fill="none" aria-hidden="true">
               <!-- Column 1 -->
-              <rect x="10" y="55" width="22" height="15" rx="2" fill="#7dd3fc" />
-              <rect x="10" y="35" width="22" height="20" rx="2" fill="#38bdf8" />
-              <rect x="10" y="15" width="22" height="20" rx="2" fill="#0284c7" />
+              <rect x="10" y="50" width="22" height="20" fill="#7dd3fc" />
+              <rect x="10" y="30" width="22" height="20" fill="#38bdf8" />
+              <rect x="10" y="15" width="22" height="15" rx="3" ry="3" fill="#0284c7" />
               <!-- Column 2 -->
-              <rect x="42" y="45" width="22" height="25" rx="2" fill="#7dd3fc" />
-              <rect x="42" y="25" width="22" height="20" rx="2" fill="#38bdf8" />
-              <rect x="42" y="5" width="22" height="20" rx="2" fill="#0284c7" />
+              <rect x="42" y="40" width="22" height="30" fill="#7dd3fc" />
+              <rect x="42" y="20" width="22" height="20" fill="#38bdf8" />
+              <rect x="42" y="5" width="22" height="15" rx="3" ry="3" fill="#0284c7" />
               <!-- Column 3 -->
-              <rect x="74" y="50" width="22" height="20" rx="2" fill="#7dd3fc" />
-              <rect x="74" y="30" width="22" height="20" rx="2" fill="#38bdf8" />
-              <rect x="74" y="10" width="22" height="20" rx="2" fill="#0284c7" />
+              <rect x="74" y="45" width="22" height="25" fill="#7dd3fc" />
+              <rect x="74" y="25" width="22" height="20" fill="#38bdf8" />
+              <rect x="74" y="10" width="22" height="15" rx="3" ry="3" fill="#0284c7" />
               <!-- Baseline -->
               <line x1="5" y1="70" x2="125" y2="70" stroke="#374151" stroke-width="1" />
             </svg>
@@ -294,6 +298,12 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </div>
+
+      <div class="text-center mt-10">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}docs/chart-types/`} class="text-accent-readable hover:text-[#e0f2fe] font-semibold text-lg">
+          Explore all chart types &rarr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -308,7 +318,10 @@ import Footer from "../components/Footer.astro";
       </p>
 
       <div class="bg-code-bg border border-border rounded-lg p-6 overflow-x-auto">
-        <pre class="text-sm leading-relaxed"><code><span class="text-text-muted">&lt;!-- 1. Add a data-chart attribute to any table --&gt;</span>
+        <pre class="text-sm leading-relaxed"><code><span class="text-text-muted">&lt;!-- 1. Add the script --&gt;</span>
+&lt;<span class="text-accent">script</span> <span class="text-accent-readable">src</span>=<span class="text-emerald-400">"https://unpkg.com/data-chart"</span> <span class="text-accent-readable">defer</span>&gt;&lt;/<span class="text-accent">script</span>&gt;
+
+<span class="text-text-muted">&lt;!-- 2. Add the attribute --&gt;</span>
 &lt;<span class="text-accent">table</span> <span class="text-accent-readable">data-chart</span>=<span class="text-emerald-400">"bar"</span>&gt;
   &lt;<span class="text-accent">thead</span>&gt;
     &lt;<span class="text-accent">tr</span>&gt;&lt;<span class="text-accent">th</span>&gt;Month&lt;/<span class="text-accent">th</span>&gt;&lt;<span class="text-accent">th</span>&gt;Sales&lt;/<span class="text-accent">th</span>&gt;&lt;/<span class="text-accent">tr</span>&gt;
@@ -319,15 +332,12 @@ import Footer from "../components/Footer.astro";
   &lt;/<span class="text-accent">tbody</span>&gt;
 &lt;/<span class="text-accent">table</span>&gt;
 
-<span class="text-text-muted">&lt;!-- 2. Add the script --&gt;</span>
-&lt;<span class="text-accent">script</span> <span class="text-accent-readable">src</span>=<span class="text-emerald-400">"https://unpkg.com/data-chart"</span>&gt;&lt;/<span class="text-accent">script</span>&gt;
-
 <span class="text-text-muted">&lt;!-- 3. There is no step 3 --&gt;</span></code></pre>
       </div>
 
       <div class="text-center mt-8">
-        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}playground/`} class="text-accent-readable hover:text-[#e0f2fe] font-semibold text-lg">
-          Try it in the playground &rarr;
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}docs/getting-started/`} class="text-accent-readable hover:text-[#e0f2fe] font-semibold text-lg">
+          Read the full docs &rarr;
         </a>
       </div>
     </div>
@@ -399,11 +409,11 @@ import Footer from "../components/Footer.astro";
 
   .chart-tag {
     font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 2px 8px;
+    font-size: 13px;
+    padding: 3px 10px;
     border-radius: 4px;
     background: var(--color-bg-surface);
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
     transition: color 0.2s, background 0.2s;
   }
   .chart-showcase-card:hover .chart-tag {

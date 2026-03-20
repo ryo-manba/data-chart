@@ -36,7 +36,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Bars grow from the baseline with staggered delays</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--cartesian" data-panel="preview">
         <table data-chart="bar" data-chart-animate>
           <caption>Quarterly Revenue</caption>
           <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
@@ -71,7 +71,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Line draws from left to right, then dots fade in</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--cartesian" data-panel="preview">
         <table data-chart="line" data-chart-animate>
           <caption>Monthly Users</caption>
           <thead><tr><th>Month</th><th>Users</th><th>Active</th></tr></thead>
@@ -107,7 +107,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Line draws across, then the area fill fades in</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--cartesian" data-panel="preview">
         <table data-chart="area" data-chart-animate>
           <caption>Weekly Visitors</caption>
           <thead><tr><th>Week</th><th>Visitors</th></tr></thead>
@@ -144,7 +144,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Slices scale in one by one</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--radial" data-panel="preview">
         <table data-chart="pie" data-chart-animate>
           <caption>OS Share</caption>
           <thead><tr><th>OS</th><th>Share</th></tr></thead>
@@ -177,7 +177,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Segments scale in with staggered delay</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--radial" data-panel="preview">
         <table data-chart="donut" data-chart-animate>
           <caption>Task Status</caption>
           <thead><tr><th>Status</th><th>Count</th></tr></thead>
@@ -212,7 +212,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Stacked segments grow from baseline together</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--cartesian" data-panel="preview">
         <table data-chart="bar" data-chart-stacked data-chart-animate>
           <caption>Device Traffic</caption>
           <thead><tr><th>Q</th><th>Desktop</th><th>Mobile</th><th>Tablet</th></tr></thead>
@@ -247,7 +247,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </div>
       </div>
       <p class="demo-desc">Horizontal bars grow from left with stagger</p>
-      <div class="demo-chart" data-panel="preview">
+      <div class="demo-chart demo-chart--cartesian" data-panel="preview">
         <table data-chart="bar" data-chart-horizontal data-chart-animate>
           <caption>Language Popularity</caption>
           <thead><tr><th>Language</th><th>Users</th></tr></thead>
@@ -449,6 +449,14 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   .demo-chart {
     padding: 1rem;
+  }
+
+  .demo-chart--cartesian {
+    min-height: 245px;
+  }
+
+  .demo-chart--radial {
+    min-height: 450px;
   }
 
   .demo-chart :global(.data-chart-svg) {

@@ -10,7 +10,7 @@ export function getColors(u: string | null, n: number): string[] {
 }
 
 const L = { text: '#4a4a44', textMuted: '#8a8a80', grid: '#e6e5df', bg: '#ffffff' } as const;
-const D = { text: '#b0b0a8', textMuted: '#6a6a62', grid: '#2c2c28', bg: '#1a1a18' } as const;
+const D = { text: '#c8c8c0', textMuted: '#9a9a90', grid: '#2c2c28', bg: '#1a1a18' } as const;
 
 export function getThemeColor(k: keyof typeof L): string {
   return (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme:dark)').matches ? D : L)[k];

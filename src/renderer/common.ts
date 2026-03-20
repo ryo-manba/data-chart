@@ -52,7 +52,7 @@ function renderChrome(svg: SVGSVGElement, l: ChartLayout, max: number, labels: s
   const yg = svgEl('g', { class: P + 'axis' });
   for (let i = 0; i <= 4; i++) {
     const y = l.paddingTop + l.chartHeight * (1 - i / 4), v = (max * i) / 4;
-    const t = svgEl('text', { x: l.paddingLeft - 8, y: y + 3, 'text-anchor': 'end', 'font-size': 10, 'font-family': FF, fill: tc });
+    const t = svgEl('text', { x: l.paddingLeft - 8, y: y + 3, 'text-anchor': 'end', 'font-size': 12, 'font-family': FF, fill: tc });
     t.textContent = v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(Math.round(v));
     yg.appendChild(t);
   }
@@ -60,7 +60,7 @@ function renderChrome(svg: SVGSVGElement, l: ChartLayout, max: number, labels: s
   // X-axis
   const xg = svgEl('g', { class: P + 'axis' }), gw = l.chartWidth / labels.length;
   for (let i = 0; i < labels.length; i++) {
-    const t = svgEl('text', { x: l.paddingLeft + gw * i + gw / 2, y: l.paddingTop + l.chartHeight + 20, 'text-anchor': 'middle', 'font-size': 11, 'font-family': FF, fill: tc });
+    const t = svgEl('text', { x: l.paddingLeft + gw * i + gw / 2, y: l.paddingTop + l.chartHeight + 20, 'text-anchor': 'middle', 'font-size': 12, 'font-family': FF, fill: tc });
     t.textContent = labels[i] ?? '';
     xg.appendChild(t);
   }
@@ -81,7 +81,7 @@ export function seriesGroup(data: ParsedData, s: number): SVGGElement {
 
 function legendItem(g: SVGGElement, x: number, y: number, c: string, label: string, tc: string): void {
   g.appendChild(svgEl('rect', { x, y: y - 6, width: 10, height: 10, rx: 2, fill: c }));
-  const t = svgEl('text', { x: x + 14, y: y + 3, 'font-size': 11, 'font-family': FF, fill: tc });
+  const t = svgEl('text', { x: x + 14, y: y + 3, 'font-size': 12, 'font-family': FF, fill: tc });
   t.textContent = label;
   g.appendChild(t);
 }

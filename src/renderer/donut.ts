@@ -11,7 +11,7 @@ export function renderDonut(data: ParsedData, config: ChartConfig, colors: strin
   const t1 = svgEl('text', { x: cx, y: cy + 6, 'text-anchor': 'middle', 'font-size': 22, 'font-weight': 700, 'font-family': 'var(--dc-font-family)', fill: tc });
   t1.textContent = String(Math.round(total));
   svg.appendChild(t1);
-  const t2 = svgEl('text', { x: cx, y: cy + 22, 'text-anchor': 'middle', 'font-size': 10, 'font-family': 'var(--dc-font-family)', fill: tm });
+  const t2 = svgEl('text', { x: cx, y: cy + 22, 'text-anchor': 'middle', 'font-size': 12, 'font-family': 'var(--dc-font-family)', fill: tm });
   t2.textContent = 'Total';
   svg.appendChild(t2);
   return svg;

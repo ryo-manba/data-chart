@@ -55,10 +55,10 @@ function renderH(data: ParsedData, config: ChartConfig, colors: string[]): SVGSV
     const y = 20 + i * (bh + rg), v = sr[i] ?? 0, w = (Math.abs(v) / mx) * cw;
     g.appendChild(svgEl('rect', { x: lm, y, width: cw, height: bh, rx: config.radius, fill: gc, opacity: 0.4 }));
     addBar(g, lm, y, w, bh, config.radius, c);
-    const lb = svgEl('text', { x: lm - 8, y: y + bh / 2 + 4, 'text-anchor': 'end', 'font-size': 11, 'font-family': ff, fill: tc });
+    const lb = svgEl('text', { x: lm - 8, y: y + bh / 2 + 4, 'text-anchor': 'end', 'font-size': 12, 'font-family': ff, fill: tc });
     lb.textContent = data.labels[i] ?? '';
     g.appendChild(lb);
-    const vl = svgEl('text', { x: lm + w + 8, y: y + bh / 2 + 4, 'font-size': 10, 'font-family': ff, fill: tc });
+    const vl = svgEl('text', { x: lm + w + 8, y: y + bh / 2 + 4, 'font-size': 12, 'font-family': ff, fill: tc });
     vl.textContent = String(v);
     g.appendChild(vl);
   }

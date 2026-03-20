@@ -6,50 +6,34 @@ description: Prevent flash of unstyled table content before chart rendering.
 
 # Anti-FOUC
 
-FOUC (Flash of Unstyled Content) happens when the raw table is briefly visible before JavaScript converts it to a chart. data-chart uses a 3-layer defense.
+FOUC (Flash of Unstyled Content) happens when the raw table is briefly visible before JavaScript converts it to a chart.
 
-## Layer 1: Auto-injected CSS (default)
+## Default Behavior
 
-data-chart injects a `<style>` tag on initialization that hides all `table[data-chart]` elements:
-
-```css
-table[data-chart] {
-  visibility: hidden;
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-```
-
-This works for most cases but has a brief window before JS executes.
-
-## Layer 2: Inline Style (recommended)
-
-Add this to your `<head>` for instant hiding:
+data-chart automatically injects CSS that hides all `table[data-chart]` elements on initialization. **No additional CSS is needed** in most cases — just load the script:
 
 ```html
-<head>
-  <style>
-    table[data-chart] {
-      visibility: hidden;
-      position: absolute;
-      width: 0; height: 0;
-      overflow: hidden;
-    }
-  </style>
-</head>
+<script src="https://unpkg.com/data-chart" defer></script>
 ```
 
-## Layer 3: External CSS
+However, because `defer` scripts run after HTML parsing, there is a brief window (typically &lt;50ms) where the table may be visible before the script executes.
 
-Import the provided CSS file:
+## Optional: Eliminate the Flash Completely
+
+If you need zero-flash loading, add this inline `<style>` to your `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/data-chart/css">
+<style>
+  table[data-chart] {
+    visibility: hidden;
+    position: absolute;
+    width: 0; height: 0;
+    overflow: hidden;
+  }
+</style>
 ```
 
-Or with a bundler:
+This is parsed before any rendering occurs, so the table is never visible. The same rules are also available as an importable CSS file:
 
 ```js
 import 'data-chart/css';
@@ -57,7 +41,7 @@ import 'data-chart/css';
 
 ## `<noscript>` Fallback
 
-For users with JavaScript disabled, restore table visibility:
+When using inline anti-FOUC CSS, add a `<noscript>` fallback so the table remains accessible with JavaScript disabled:
 
 ```html
 <noscript>
@@ -72,8 +56,26 @@ For users with JavaScript disabled, restore table visibility:
 </noscript>
 ```
 
-This ensures the table remains accessible as a data source even without the chart.
+## Preventing Layout Shift (CLS)
 
-## CLS Impact
+Inserting the chart SVG can cause layout shift. To prevent this, reserve space for the chart container using `aspect-ratio`:
 
-With Layer 2 applied, data-chart has zero CLS (Cumulative Layout Shift) impact because the table is hidden from the start and the chart is rendered in place.
+```css
+.chart-wrapper {
+  aspect-ratio: 500 / 220;
+}
+```
+
+The SVG viewBox width is always `500`. The height defaults to `220` and can be changed with `data-chart-height`. If you set a custom height, update the ratio accordingly:
+
+```html
+<table data-chart="bar" data-chart-height="300">...</table>
+```
+
+```css
+.chart-wrapper {
+  aspect-ratio: 500 / 300;
+}
+```
+
+Combining inline anti-FOUC CSS with space reservation can effectively eliminate CLS.
