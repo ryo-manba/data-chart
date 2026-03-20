@@ -1,0 +1,263 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Integration
+description: Use data-chart with any framework or static site generator.
+---
+
+# Integration
+
+data-chart works with any HTML-based project. Since it converts `<table>` elements into SVG charts using data attributes, there's nothing framework-specific to configure.
+
+## Table of Contents
+
+- [Static HTML](#static-html)
+- [React (Vite)](#react-vite)
+- [Vue (Vite)](#vue-vite)
+- [Next.js](#nextjs)
+- [Nuxt](#nuxt)
+- [Astro](#astro)
+
+## Static HTML
+
+The simplest integration. Add the script tag and start using `data-chart` on your tables.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/data-chart@latest/dist/data-chart.js"></script>
+</head>
+<body>
+  <table data-chart="bar">
+    <thead>
+      <tr><th>Quarter</th><th>Revenue</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Q1</td><td>420</td></tr>
+      <tr><td>Q2</td><td>580</td></tr>
+      <tr><td>Q3</td><td>510</td></tr>
+      <tr><td>Q4</td><td>690</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
+```
+
+## React (Vite)
+
+Install via npm:
+
+```bash
+npm install data-chart
+```
+
+Import once at the top of your entry file. data-chart auto-initializes and uses MutationObserver to detect components as they mount.
+
+```tsx
+// src/main.tsx
+import 'data-chart';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+```
+
+Then use `data-chart` attributes on any `<table>` in any component:
+
+```tsx
+// src/App.tsx
+function App() {
+  return (
+    <table data-chart="line" data-chart-grid="y">
+      <thead>
+        <tr><th>Month</th><th>Users</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jan</td><td>1200</td></tr>
+        <tr><td>Feb</td><td>1800</td></tr>
+        <tr><td>Mar</td><td>2400</td></tr>
+      </tbody>
+    </table>
+  );
+}
+```
+
+No `useEffect`, no refs, no wrapper components needed.
+
+## Vue (Vite)
+
+Install via npm:
+
+```bash
+npm install data-chart
+```
+
+Import once at the top of your entry file. data-chart auto-initializes and uses MutationObserver to detect components as they mount.
+
+```ts
+// src/main.ts
+import 'data-chart';
+import { createApp } from 'vue';
+import App from './App.vue';
+
+createApp(App).mount('#app');
+```
+
+Then use `data-chart` attributes on any `<table>` in any component:
+
+```vue
+<!-- src/components/Chart.vue -->
+<template>
+  <table data-chart="bar" data-chart-stacked>
+    <thead>
+      <tr><th>Q</th><th>Desktop</th><th>Mobile</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Q1</td><td>300</td><td>200</td></tr>
+      <tr><td>Q2</td><td>280</td><td>250</td></tr>
+    </tbody>
+  </table>
+</template>
+```
+
+No `onMounted`, no refs, no directives needed.
+
+## Next.js
+
+Install via npm:
+
+```bash
+npm install data-chart
+```
+
+data-chart accesses `document` at module level, so use a dynamic import inside `useEffect` to avoid SSR errors:
+
+```tsx
+// app/DataChart.tsx
+'use client';
+import { useEffect } from 'react';
+
+export default function DataChart() {
+  useEffect(() => {
+    import('data-chart');
+  }, []);
+  return null;
+}
+```
+
+```tsx
+// app/layout.tsx
+import DataChart from './DataChart';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <DataChart />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Then use attributes in any Server or Client Component:
+
+```tsx
+// app/page.tsx
+export default function Home() {
+  return (
+    <main>
+      <table data-chart="pie">
+        <thead>
+          <tr><th>Browser</th><th>Share</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Chrome</td><td>65</td></tr>
+          <tr><td>Safari</td><td>19</td></tr>
+          <tr><td>Firefox</td><td>10</td></tr>
+          <tr><td>Other</td><td>6</td></tr>
+        </tbody>
+      </table>
+    </main>
+  );
+}
+```
+
+## Nuxt
+
+Use `useHead` in your root component to load data-chart via CDN:
+
+```vue
+<!-- app/app.vue -->
+<script setup>
+useHead({
+  script: [
+    {
+      src: 'https://unpkg.com/data-chart@latest/dist/data-chart.js',
+      tagPosition: 'head',
+    },
+  ],
+});
+</script>
+
+<template>
+  <div>
+    <table data-chart="donut">
+      <thead>
+        <tr><th>Category</th><th>Budget</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Engineering</td><td>45</td></tr>
+        <tr><td>Marketing</td><td>25</td></tr>
+        <tr><td>Sales</td><td>20</td></tr>
+        <tr><td>Support</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+```
+
+No extra plugins or `nuxt.config.ts` changes needed.
+
+## Astro
+
+Add to your base layout:
+
+```astro
+---
+// src/layouts/Layout.astro
+---
+<html>
+  <head>
+    <script src="https://unpkg.com/data-chart@latest/dist/data-chart.js"></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+Use in any `.astro` or `.mdx` page:
+
+```astro
+<table data-chart="area" data-chart-grid="both">
+  <thead>
+    <tr><th>Week</th><th>Visitors</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>W1</td><td>3200</td></tr>
+    <tr><td>W2</td><td>4100</td></tr>
+    <tr><td>W3</td><td>5200</td></tr>
+  </tbody>
+</table>
+```
+
+## Key Principle
+
+data-chart is framework-agnostic by design. It works anywhere you can write HTML `<table>` elements. MutationObserver automatically detects dynamically added tables, so SPA navigation and lazy-loaded content work out of the box.

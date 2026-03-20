@@ -39,12 +39,6 @@ const altPath = isJa ? base : `${base}ja/`;
         Playground
       </a>
       <a
-        href={isJa ? `${base}ja/advanced/` : `${base}advanced/`}
-        class:list={['text-sm font-medium transition-colors no-underline', currentPath.includes('/advanced') ? 'text-text' : 'text-text-secondary hover:text-text']}
-      >
-        Animations
-      </a>
-      <a
         href="https://www.npmjs.com/package/data-chart"
         target="_blank"
         rel="noopener noreferrer"
@@ -87,7 +81,6 @@ const altPath = isJa ? base : `${base}ja/`;
     <nav class="flex flex-col p-4 gap-3">
       <a href={`${base}docs/getting-started/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Docs</a>
       <a href={isJa ? `${base}ja/playground/` : `${base}playground/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Playground</a>
-      <a href={isJa ? `${base}ja/advanced/` : `${base}advanced/`} class="text-sm font-medium text-text-secondary hover:text-text no-underline">Animations</a>
       <a href="https://www.npmjs.com/package/data-chart" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-text-secondary hover:text-text no-underline">npm</a>
       <a href="https://github.com/ryo-manba/data-chart" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-text-secondary hover:text-text no-underline">GitHub</a>
       <a href={altPath} class="text-sm font-medium text-text-secondary hover:text-text no-underline border-t border-border pt-3">{langLabel}</a>

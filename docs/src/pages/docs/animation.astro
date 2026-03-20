@@ -1,0 +1,384 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Animation" description="Add entrance animations to your charts with a single attribute.">
+  <h1>Animation</h1>
+  <p>Add <code>data-chart-animate</code> to any table for entrance animations. Each chart type has its own animation style.</p>
+
+  <h2>Quick Start</h2>
+  <pre><code>&lt;table data-chart="bar" data-chart-animate&gt;
+  ...
+&lt;/table&gt;</code></pre>
+
+  <!-- Live Examples -->
+  <h2>Live Examples</h2>
+  <p>Click <strong>Replay</strong> to re-run any animation.</p>
+
+  <div class="demo-grid">
+    <!-- Bar Chart -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <h3>Bar Chart</h3>
+        <button type="button" class="replay-btn" aria-label="Replay animation">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Bars grow from the baseline with staggered delays</p>
+      <div class="demo-chart">
+        <table data-chart="bar" data-chart-animate>
+          <caption>Quarterly Revenue</caption>
+          <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
+          <tbody>
+            <tr><td>Q1</td><td>420</td><td>180</td></tr>
+            <tr><td>Q2</td><td>580</td><td>240</td></tr>
+            <tr><td>Q3</td><td>510</td><td>210</td></tr>
+            <tr><td>Q4</td><td>690</td><td>310</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Line Chart -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <h3>Line Chart</h3>
+        <button type="button" class="replay-btn" aria-label="Replay animation">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Line draws from left to right, then dots fade in</p>
+      <div class="demo-chart">
+        <table data-chart="line" data-chart-animate>
+          <caption>Monthly Users</caption>
+          <thead><tr><th>Month</th><th>Users</th><th>Active</th></tr></thead>
+          <tbody>
+            <tr><td>Jan</td><td>1200</td><td>900</td></tr>
+            <tr><td>Feb</td><td>1800</td><td>1400</td></tr>
+            <tr><td>Mar</td><td>1500</td><td>1100</td></tr>
+            <tr><td>Apr</td><td>2200</td><td>1800</td></tr>
+            <tr><td>May</td><td>2800</td><td>2200</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Area Chart -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <h3>Area Chart</h3>
+        <button type="button" class="replay-btn" aria-label="Replay animation">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Line draws across, then the area fill fades in</p>
+      <div class="demo-chart">
+        <table data-chart="area" data-chart-animate>
+          <caption>Weekly Visitors</caption>
+          <thead><tr><th>Week</th><th>Visitors</th></tr></thead>
+          <tbody>
+            <tr><td>W1</td><td>3200</td></tr>
+            <tr><td>W2</td><td>4100</td></tr>
+            <tr><td>W3</td><td>3800</td></tr>
+            <tr><td>W4</td><td>5200</td></tr>
+            <tr><td>W5</td><td>4800</td></tr>
+            <tr><td>W6</td><td>5900</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pie & Donut side by side -->
+    <div class="demo-card demo-half">
+      <div class="demo-header">
+        <h3>Pie</h3>
+        <button type="button" class="replay-btn" aria-label="Replay">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Slices scale in one by one</p>
+      <div class="demo-chart">
+        <table data-chart="pie" data-chart-animate>
+          <caption>Browser Share</caption>
+          <thead><tr><th>Browser</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr><td>Chrome</td><td>65</td></tr>
+            <tr><td>Safari</td><td>19</td></tr>
+            <tr><td>Firefox</td><td>10</td></tr>
+            <tr><td>Other</td><td>6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="demo-card demo-half">
+      <div class="demo-header">
+        <h3>Donut</h3>
+        <button type="button" class="replay-btn" aria-label="Replay">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Segments scale in with staggered delay</p>
+      <div class="demo-chart">
+        <table data-chart="donut" data-chart-animate>
+          <caption>Budget Allocation</caption>
+          <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+          <tbody>
+            <tr><td>Engineering</td><td>45</td></tr>
+            <tr><td>Marketing</td><td>25</td></tr>
+            <tr><td>Sales</td><td>20</td></tr>
+            <tr><td>Support</td><td>10</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stacked Bar -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <h3>Stacked Bar</h3>
+        <button type="button" class="replay-btn" aria-label="Replay">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Stacked segments grow from baseline together</p>
+      <div class="demo-chart">
+        <table data-chart="bar" data-chart-stacked data-chart-animate>
+          <caption>Device Traffic</caption>
+          <thead><tr><th>Q</th><th>Desktop</th><th>Mobile</th><th>Tablet</th></tr></thead>
+          <tbody>
+            <tr><td>Q1</td><td>300</td><td>200</td><td>50</td></tr>
+            <tr><td>Q2</td><td>280</td><td>250</td><td>60</td></tr>
+            <tr><td>Q3</td><td>260</td><td>300</td><td>70</td></tr>
+            <tr><td>Q4</td><td>320</td><td>350</td><td>80</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Horizontal Bar -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <h3>Horizontal Bar</h3>
+        <button type="button" class="replay-btn" aria-label="Replay">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7a6 6 0 1 1 1.76 4.24"/><polyline points="1 11.5 1 7.5 5 7.5"/></svg>
+          Replay
+        </button>
+      </div>
+      <p class="demo-desc">Horizontal bars grow from left with stagger</p>
+      <div class="demo-chart">
+        <table data-chart="bar" data-chart-horizontal data-chart-animate>
+          <caption>Language Popularity</caption>
+          <thead><tr><th>Language</th><th>Users</th></tr></thead>
+          <tbody>
+            <tr><td>TypeScript</td><td>850</td></tr>
+            <tr><td>Python</td><td>720</td></tr>
+            <tr><td>Go</td><td>510</td></tr>
+            <tr><td>Rust</td><td>340</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animation Reference Table -->
+  <h2>Animation by Chart Type</h2>
+  <div class="ref-table-wrapper">
+    <table class="ref-table">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Animation</th>
+          <th>Duration</th>
+          <th>Stagger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>.data-chart-bar</code></td>
+          <td>Height grows from 0</td>
+          <td>600ms</td>
+          <td>60ms per bar</td>
+        </tr>
+        <tr>
+          <td><code>.data-chart-line</code></td>
+          <td>Stroke draws left to right</td>
+          <td>960ms</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>.data-chart-dot</code></td>
+          <td>Fade in after line completes</td>
+          <td>300ms</td>
+          <td>80ms per dot</td>
+        </tr>
+        <tr>
+          <td><code>.data-chart-area</code></td>
+          <td>Opacity fades in</td>
+          <td>800ms</td>
+          <td>400ms delay</td>
+        </tr>
+        <tr>
+          <td><code>.data-chart-slice</code></td>
+          <td>Scale from center</td>
+          <td>600ms</td>
+          <td>80ms per slice</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Customization</h2>
+
+  <h3>Duration</h3>
+  <p>Control animation speed per element:</p>
+  <pre><code>&lt;table data-chart="bar" data-chart-animate data-chart-animate-duration="1200"&gt;</code></pre>
+  <p>Default: <code>600</code>ms. Range: any positive number.</p>
+
+  <h3>Stagger</h3>
+  <p>Control delay between elements:</p>
+  <pre><code>&lt;table data-chart="bar" data-chart-animate data-chart-animate-stagger="100"&gt;</code></pre>
+  <p>Default: <code>60</code>ms. Higher values create more sequential animations.</p>
+
+  <h3>Combined</h3>
+  <pre><code>&lt;table
+  data-chart="line"
+  data-chart-animate
+  data-chart-animate-duration="300"
+  data-chart-animate-stagger="30"
+&gt;</code></pre>
+
+  <h2>Reduced Motion</h2>
+  <p>Animations are automatically disabled when <code>prefers-reduced-motion: reduce</code> is set. No additional configuration needed. Charts render instantly in their final state.</p>
+
+  <h2>Replay via JavaScript</h2>
+  <p>Use the <code>refresh()</code> API to replay animations:</p>
+  <pre><code>const table = document.querySelector('table[data-chart]');
+window.dataChart.refresh(table);</code></pre>
+</DocsLayout>
+
+<style>
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .demo-half {
+    /* Will become side-by-side on wider screens */
+  }
+
+  @media (min-width: 640px) {
+    .demo-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .demo-card:not(.demo-half) {
+      grid-column: span 2;
+    }
+  }
+
+  .demo-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--color-bg-surface, rgba(255,255,255,0.02));
+  }
+
+  .demo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .demo-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .replay-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    transition: color 0.15s;
+  }
+
+  .replay-btn:hover {
+    color: var(--color-accent-readable);
+  }
+
+  .demo-desc {
+    margin: 0;
+    padding: 0.5rem 1rem 0;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .demo-chart {
+    padding: 1rem;
+  }
+
+  .ref-table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .ref-table th,
+  .ref-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ref-table th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+  }
+
+  .ref-table code {
+    font-size: 0.8rem;
+    color: var(--color-accent-readable);
+  }
+</style>
+
+<script>
+  import dataChart from '../../../../src/index.ts';
+
+  function initReplay() {
+    document.querySelectorAll('.replay-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.demo-card');
+        if (!card) return;
+        const table = card.querySelector('table[data-chart]') as HTMLTableElement | null;
+        if (table) dataChart.refresh(table);
+      });
+    });
+  }
+
+  initReplay();
+  document.addEventListener('astro:after-swap', initReplay);
+</script>
