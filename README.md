@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://ryo-manba.github.io/data-chart/"><img src=".github/og-image.png" alt="data-chart" width="100%" /></a>
+<a href="https://ryo-manba.github.io/data-chart/"><img src="https://ryo-manba.github.io/data-chart/og-image.png" alt="data-chart — Chart your tables. No JavaScript to write." width="100%" /></a>
 
   <h1>data-chart</h1>
 
