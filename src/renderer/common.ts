@@ -21,11 +21,12 @@ export function createSvg(w: number, h: number): SVGSVGElement {
 
 export function computeLayout(c: ChartConfig, sc: number): ChartLayout {
   const w = 500,
-    h = c.height + (c.legend === "bottom" && sc > 1 ? 28 : 0),
+    legendBottom = c.legend === "bottom" && sc > 1,
+    h = c.height + (legendBottom ? 32 : 0),
     pt = 20 + (c.legend === "top" && sc > 1 ? 28 : 0),
     pl = 46,
     pr = 20,
-    pb = 36;
+    pb = 36 + (legendBottom ? 32 : 0);
   return {
     width: w,
     height: h,
@@ -179,7 +180,7 @@ export function renderLegend(
     return;
   const g = svgEl("g", { class: P + "legend" }),
     tc = getThemeColor("text");
-  const y = cfg.legend === "bottom" ? l.height - 8 : 16;
+  const y = cfg.legend === "bottom" ? l.height - 4 : 16;
   let x = l.paddingLeft;
   for (let i = 0; i < data.headers.length; i++) {
     const h = data.headers[i] ?? "";
