@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data-chart Static HTML Example</title>
+  <script src="https://unpkg.com/data-chart@latest/dist/data-chart.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+    section { margin: 2rem 0; }
+  </style>
+</head>
+<body>
+  <h1>data-chart Static HTML Example</h1>
+
+  <section>
+    <table data-chart="bar">
+      <caption>Quarterly Revenue</caption>
+      <thead>
+        <tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td>420</td><td>180</td></tr>
+        <tr><td>Q2</td><td>580</td><td>240</td></tr>
+        <tr><td>Q3</td><td>510</td><td>210</td></tr>
+        <tr><td>Q4</td><td>690</td><td>310</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <table data-chart="line" data-chart-grid="y">
+      <caption>Monthly Users</caption>
+      <thead>
+        <tr><th>Month</th><th>Users</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jan</td><td>1200</td></tr>
+        <tr><td>Feb</td><td>1800</td></tr>
+        <tr><td>Mar</td><td>1500</td></tr>
+        <tr><td>Apr</td><td>2200</td></tr>
+        <tr><td>May</td><td>2800</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <table data-chart="pie">
+      <caption>Browser Share</caption>
+      <thead>
+        <tr><th>Browser</th><th>Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Chrome</td><td>65</td></tr>
+        <tr><td>Safari</td><td>19</td></tr>
+        <tr><td>Firefox</td><td>10</td></tr>
+        <tr><td>Other</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>

@@ -1,0 +1,17 @@
+---
+// src/layouts/Layout.astro
+---
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro + data-chart</title>
+    <script src="https://unpkg.com/data-chart@latest/dist/data-chart.js"></script>
+    <style is:global>
+      body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

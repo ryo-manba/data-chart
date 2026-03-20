@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout>
+  <h1>Astro + data-chart</h1>
+
+  <table data-chart="line" data-chart-grid="both">
+    <caption>Monthly Users</caption>
+    <thead>
+      <tr><th>Month</th><th>Users</th><th>Active</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Jan</td><td>1200</td><td>900</td></tr>
+      <tr><td>Feb</td><td>1800</td><td>1400</td></tr>
+      <tr><td>Mar</td><td>1500</td><td>1100</td></tr>
+      <tr><td>Apr</td><td>2200</td><td>1800</td></tr>
+      <tr><td>May</td><td>2800</td><td>2200</td></tr>
+    </tbody>
+  </table>
+
+  <table data-chart="donut">
+    <caption>Budget Allocation</caption>
+    <thead>
+      <tr><th>Category</th><th>Budget</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Engineering</td><td>45</td></tr>
+      <tr><td>Marketing</td><td>25</td></tr>
+      <tr><td>Sales</td><td>20</td></tr>
+      <tr><td>Support</td><td>10</td></tr>
+    </tbody>
+  </table>
+</Layout>
