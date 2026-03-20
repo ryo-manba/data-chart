@@ -1,0 +1,97 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Animation
+description: Add entrance animations to your charts with a single attribute.
+---
+
+# Animation
+
+Add `data-chart-animate` to any table for entrance animations. Each chart type has its own animation style.
+
+## Quick Start
+
+```html
+<table data-chart="bar" data-chart-animate>
+  ...
+</table>
+```
+
+## Animation by Chart Type
+
+| Element | Animation | Duration | Stagger |
+|---------|-----------|----------|---------|
+| `.data-chart-bar` | Height grows from 0 | 600ms | 60ms per bar |
+| `.data-chart-line` | Stroke draws left to right | 960ms | — |
+| `.data-chart-dot` | Fade in after line completes | 300ms | 80ms per dot |
+| `.data-chart-area` | Opacity fades in | 800ms | 400ms delay |
+| `.data-chart-slice` | Scale from 0.3 to 1 | 600ms | 80ms per slice |
+
+### Bar (Vertical)
+
+Bars grow from the baseline upward with staggered delays.
+
+### Bar (Horizontal)
+
+Bars grow from left to right.
+
+### Stacked Bar
+
+Segments within each column animate sequentially — bottom first, then middle, then top — giving the appearance of building up.
+
+### Line / Area
+
+The line path draws from left to right using `stroke-dashoffset`. Dots fade in after the line completes. For area charts, the fill fades in after a short delay.
+
+### Pie / Donut
+
+Slices scale in from the center with staggered delays.
+
+## Customization
+
+### Duration
+
+Control animation speed per element:
+
+```html
+<table data-chart="bar" data-chart-animate data-chart-animate-duration="1200">
+```
+
+Default: `600`ms. Range: any positive number.
+
+### Stagger
+
+Control delay between elements:
+
+```html
+<table data-chart="bar" data-chart-animate data-chart-animate-stagger="100">
+```
+
+Default: `60`ms. Higher values create more sequential animations.
+
+### Combined
+
+```html
+<table
+  data-chart="line"
+  data-chart-animate
+  data-chart-animate-duration="300"
+  data-chart-animate-stagger="30"
+>
+```
+
+## Reduced Motion
+
+Animations are automatically disabled when `prefers-reduced-motion: reduce` is set. No additional configuration needed. Charts render instantly in their final state.
+
+## Replay via JavaScript
+
+Use the `refresh()` API to replay animations:
+
+```js
+const table = document.querySelector('table[data-chart]');
+window.dataChart.refresh(table);
+```
+
+## Implementation
+
+Animations use CSS transitions and `requestAnimationFrame` — no `<animate>` elements, no `@keyframes`, no external animation libraries. The total animation code adds approximately 0.5KB gzip to the bundle.

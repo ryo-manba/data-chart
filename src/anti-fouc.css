@@ -1,0 +1,10 @@
+/* data-chart Anti-FOUC (Flash of Unstyled Content)
+ * Include this in <head> to hide tables before JS loads.
+ * Optional: data-chart injects equivalent styles at runtime. */
+table[data-chart] {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

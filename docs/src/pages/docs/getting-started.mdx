@@ -1,0 +1,83 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Getting Started
+description: Install data-chart and create your first chart in under a minute.
+---
+
+# Getting Started
+
+## Installation
+
+### CDN (quickest)
+
+```html
+<script src="https://unpkg.com/data-chart" defer></script>
+```
+
+### npm
+
+```bash
+npm install data-chart
+```
+
+```js
+import 'data-chart';
+```
+
+### pnpm / yarn
+
+```bash
+pnpm add data-chart
+# or
+yarn add data-chart
+```
+
+## Basic Usage
+
+Add a `data-chart` attribute to any HTML `<table>`:
+
+```html
+<table data-chart="bar">
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Jan</td><td>120</td></tr>
+    <tr><td>Feb</td><td>150</td></tr>
+    <tr><td>Mar</td><td>180</td></tr>
+    <tr><td>Apr</td><td>210</td></tr>
+  </tbody>
+</table>
+```
+
+That's it. data-chart automatically converts the table into an SVG chart on page load.
+
+## How It Works
+
+1. On `DOMContentLoaded`, data-chart finds all `<table data-chart>` elements
+2. Each table is parsed: `<thead>` becomes series names, `<tbody>` becomes data points
+3. An SVG chart is generated and inserted into a `.data-chart-container` wrapper
+4. The original table is hidden (`display: none` + `aria-hidden="true"`)
+5. A `MutationObserver` watches for dynamically added tables (SPA support)
+
+## Progressive Enhancement
+
+Without JavaScript, the table displays normally. With JavaScript, it becomes a chart. This is progressive enhancement by design.
+
+```html
+<!-- Works with JS disabled (shows table) -->
+<!-- Works with JS enabled (shows chart) -->
+<table data-chart="line">
+  ...
+</table>
+```
+
+## Next Steps
+
+- [Chart Types](/data-chart/docs/chart-types/) — Explore all 6 chart types
+- [Attributes](/data-chart/docs/attributes/) — Full attribute reference
+- [Animation](/data-chart/docs/animation/) — Add entrance animations
+- [Playground](/data-chart/playground/) — Try it interactively

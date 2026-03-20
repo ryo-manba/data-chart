@@ -1,0 +1,137 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Chart Types
+description: All 6 chart types supported by data-chart.
+---
+
+# Chart Types
+
+data-chart supports 6 chart types, all set via the `data-chart` attribute.
+
+## Bar (Vertical)
+
+The default chart type. Grouped vertical bars for comparing categories.
+
+```html
+<table data-chart="bar">
+  <thead><tr><th>Month</th><th>Revenue</th><th>Profit</th></tr></thead>
+  <tbody>
+    <tr><td>Q1</td><td>420</td><td>180</td></tr>
+    <tr><td>Q2</td><td>580</td><td>240</td></tr>
+  </tbody>
+</table>
+```
+
+Multiple series (multiple `<th>` columns after the first) are automatically grouped side by side.
+
+## Bar (Horizontal)
+
+Add `data-chart-horizontal` for horizontal bars. Best for rankings.
+
+```html
+<table data-chart="bar" data-chart-horizontal>
+  <thead><tr><th>Language</th><th>Users</th></tr></thead>
+  <tbody>
+    <tr><td>TypeScript</td><td>850</td></tr>
+    <tr><td>Python</td><td>720</td></tr>
+    <tr><td>Go</td><td>510</td></tr>
+  </tbody>
+</table>
+```
+
+## Bar (Stacked)
+
+Add `data-chart-stacked` to stack series on top of each other.
+
+```html
+<table data-chart="bar" data-chart-stacked>
+  <thead><tr><th>Q</th><th>Desktop</th><th>Mobile</th><th>Tablet</th></tr></thead>
+  <tbody>
+    <tr><td>Q1</td><td>300</td><td>200</td><td>50</td></tr>
+    <tr><td>Q2</td><td>280</td><td>250</td><td>60</td></tr>
+  </tbody>
+</table>
+```
+
+## Line
+
+Connected data points showing trends over time.
+
+```html
+<table data-chart="line">
+  <thead><tr><th>Month</th><th>Users</th></tr></thead>
+  <tbody>
+    <tr><td>Jan</td><td>1200</td></tr>
+    <tr><td>Feb</td><td>1800</td></tr>
+    <tr><td>Mar</td><td>2200</td></tr>
+  </tbody>
+</table>
+```
+
+Line charts support multiple series. Each series gets its own colored line and dots.
+
+## Area
+
+Same as line, with a filled area beneath the line for volume emphasis.
+
+```html
+<table data-chart="area">
+  <thead><tr><th>Week</th><th>Visitors</th></tr></thead>
+  <tbody>
+    <tr><td>W1</td><td>3200</td></tr>
+    <tr><td>W2</td><td>4100</td></tr>
+    <tr><td>W3</td><td>5200</td></tr>
+  </tbody>
+</table>
+```
+
+The area fill uses 15% opacity of the series color.
+
+## Pie
+
+Proportional slices showing composition. Uses the first data column only.
+
+```html
+<table data-chart="pie">
+  <thead><tr><th>Browser</th><th>Share</th></tr></thead>
+  <tbody>
+    <tr><td>Chrome</td><td>65</td></tr>
+    <tr><td>Safari</td><td>19</td></tr>
+    <tr><td>Firefox</td><td>10</td></tr>
+    <tr><td>Other</td><td>6</td></tr>
+  </tbody>
+</table>
+```
+
+A legend with percentages is automatically generated below the pie.
+
+## Donut
+
+Same as pie, with a hollow center displaying the total value.
+
+```html
+<table data-chart="donut">
+  <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+  <tbody>
+    <tr><td>Engineering</td><td>45</td></tr>
+    <tr><td>Marketing</td><td>25</td></tr>
+    <tr><td>Sales</td><td>20</td></tr>
+    <tr><td>Support</td><td>10</td></tr>
+  </tbody>
+</table>
+```
+
+## Table Parsing Rules
+
+| Input | Parsed As |
+|-------|-----------|
+| `"123"` | `123` |
+| `"1,234"` | `1234` (commas removed) |
+| `"85%"` | `85` (% removed) |
+| `"$3.50"` | `3.5` (currency symbol removed) |
+| `"¥1,200"` | `1200` |
+| `""` (empty) | `0` |
+| `"N/A"` | `0` |
+| `"-42"` | `-42` |
+
+The first `<th>` column is always treated as category labels (X-axis). Subsequent columns are data series.

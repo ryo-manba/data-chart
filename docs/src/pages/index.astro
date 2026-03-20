@@ -1,0 +1,425 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="data-chart — Chart your tables. No JavaScript to write.">
+  <Header />
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6">
+        Chart with <span class="gradient-text">just HTML</span>
+      </h1>
+      <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-8">
+        Convert HTML tables into beautiful SVG charts using data attributes. Under 5KB. No dependencies.
+      </p>
+
+      <!-- Install one-liner -->
+      <div class="inline-flex items-center gap-3 bg-code-bg border border-border rounded-lg px-5 py-3 mb-8">
+        <code class="font-mono text-sm text-text-secondary">
+          <span class="text-text-muted">$</span> npm install data-chart
+        </code>
+        <button id="copy-install" class="text-text-muted hover:text-text transition-colors" aria-label="Copy install command">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}docs/getting-started/`} class="btn-primary">
+          Get Started
+        </a>
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}playground/`} class="btn-secondary">
+          Playground
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart Showcase -->
+  <section class="py-20 px-4 sm:px-6 border-t border-border">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-xs font-semibold tracking-widest text-text-muted uppercase mb-4">Chart Library</p>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-4">
+        6 chart types
+      </h2>
+      <p class="text-center text-text-secondary mb-12 max-w-xl mx-auto">
+        From simple bars to detailed donuts. Every chart is responsive, accessible, and dark-mode ready.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Bar -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview">
+            <svg width="120" height="90" viewBox="0 0 120 90" fill="none" aria-hidden="true">
+              <rect x="10" y="50" width="20" height="40" rx="3" fill="#7dd3fc" />
+              <rect x="35" y="25" width="20" height="65" rx="3" fill="#38bdf8" />
+              <rect x="60" y="10" width="20" height="80" rx="3" fill="#0ea5e9" />
+              <rect x="85" y="35" width="20" height="55" rx="3" fill="#0284c7" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Bar</h3>
+            <p class="text-sm text-text-secondary mb-4">Vertical grouped bars for comparing categories.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">bar</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Bar -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview">
+            <svg width="140" height="90" viewBox="0 0 140 90" fill="none" aria-hidden="true">
+              <rect x="0" y="5" width="110" height="16" rx="3" fill="#0ea5e9" />
+              <rect x="0" y="26" width="85" height="16" rx="3" fill="#38bdf8" />
+              <rect x="0" y="47" width="130" height="16" rx="3" fill="#0284c7" />
+              <rect x="0" y="68" width="60" height="16" rx="3" fill="#7dd3fc" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Horizontal Bar</h3>
+            <p class="text-sm text-text-secondary mb-4">Ranked horizontal bars with value labels.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">bar</code>
+              <code class="chart-tag">data-chart-horizontal</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stacked Bar -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview">
+            <svg width="130" height="90" viewBox="0 0 130 90" fill="none" aria-hidden="true">
+              <!-- Column 1 -->
+              <rect x="10" y="55" width="22" height="15" rx="2" fill="#7dd3fc" />
+              <rect x="10" y="35" width="22" height="20" rx="2" fill="#38bdf8" />
+              <rect x="10" y="15" width="22" height="20" rx="2" fill="#0284c7" />
+              <!-- Column 2 -->
+              <rect x="42" y="45" width="22" height="25" rx="2" fill="#7dd3fc" />
+              <rect x="42" y="25" width="22" height="20" rx="2" fill="#38bdf8" />
+              <rect x="42" y="5" width="22" height="20" rx="2" fill="#0284c7" />
+              <!-- Column 3 -->
+              <rect x="74" y="50" width="22" height="20" rx="2" fill="#7dd3fc" />
+              <rect x="74" y="30" width="22" height="20" rx="2" fill="#38bdf8" />
+              <rect x="74" y="10" width="22" height="20" rx="2" fill="#0284c7" />
+              <!-- Baseline -->
+              <line x1="5" y1="70" x2="125" y2="70" stroke="#374151" stroke-width="1" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Stacked Bar</h3>
+            <p class="text-sm text-text-secondary mb-4">Stacked segments showing composition.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">bar</code>
+              <code class="chart-tag">data-chart-stacked</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview">
+            <svg width="140" height="90" viewBox="0 0 140 90" fill="none" aria-hidden="true">
+              <polyline points="10,70 40,45 70,55 100,20 130,30" stroke="#0ea5e9" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="10" cy="70" r="4" fill="#0ea5e9" />
+              <circle cx="40" cy="45" r="4" fill="#38bdf8" />
+              <circle cx="70" cy="55" r="4" fill="#0ea5e9" />
+              <circle cx="100" cy="20" r="4" fill="#38bdf8" />
+              <circle cx="130" cy="30" r="4" fill="#0ea5e9" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Line</h3>
+            <p class="text-sm text-text-secondary mb-4">Connected data points showing trends over time.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">line</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview">
+            <svg width="140" height="90" viewBox="0 0 140 90" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.4" />
+                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.05" />
+                </linearGradient>
+              </defs>
+              <path d="M10,65 L40,40 L70,50 L100,15 L130,25 L130,80 L10,80 Z" fill="url(#areaGrad)" />
+              <polyline points="10,65 40,40 70,50 100,15 130,25" stroke="#0ea5e9" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Area</h3>
+            <p class="text-sm text-text-secondary mb-4">Filled area beneath lines for volume emphasis.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">area</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie & Donut -->
+        <div class="glass-card overflow-hidden chart-showcase-card">
+          <div class="chart-preview flex-row gap-6">
+            <!-- Pie -->
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" aria-hidden="true">
+              <circle cx="35" cy="35" r="30" fill="#0369a1" />
+              <path d="M35,35 L35,5 A30,30 0 0,1 60.98,20 Z" fill="#0ea5e9" />
+              <path d="M35,35 L60.98,20 A30,30 0 0,1 60.98,50 Z" fill="#38bdf8" />
+              <path d="M35,35 L60.98,50 A30,30 0 0,1 35,65 Z" fill="#7dd3fc" />
+            </svg>
+            <!-- Donut -->
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" aria-hidden="true">
+              <circle cx="35" cy="35" r="28" stroke="#0369a1" stroke-width="10" fill="none" />
+              <circle cx="35" cy="35" r="28" stroke="#0ea5e9" stroke-width="10" fill="none"
+                stroke-dasharray="44 132" stroke-dashoffset="0" />
+              <circle cx="35" cy="35" r="28" stroke="#38bdf8" stroke-width="10" fill="none"
+                stroke-dasharray="55 121" stroke-dashoffset="-44" />
+              <circle cx="35" cy="35" r="28" stroke="#7dd3fc" stroke-width="10" fill="none"
+                stroke-dasharray="33 143" stroke-dashoffset="-99" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-heading font-semibold mb-1.5">Pie & Donut</h3>
+            <p class="text-sm text-text-secondary mb-4">Proportional slices with optional center total.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="chart-tag">pie</code>
+              <code class="chart-tag">donut</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo -->
+  <section class="py-20 px-4 sm:px-6 border-t border-border">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-xs font-semibold tracking-widest text-text-muted uppercase mb-4">Live Demo</p>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-4">
+        See it in action
+      </h2>
+      <p class="text-center text-text-secondary mb-12 max-w-xl mx-auto">
+        Real charts rendered from plain HTML tables. Add <code class="bg-code-bg px-1.5 py-0.5 rounded text-xs font-mono text-accent-readable">data-chart-animate</code> for entrance animations.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Bar chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Bar Chart</h3>
+            <code class="chart-tag">data-chart="bar"</code>
+          </div>
+          <div class="chart-demo">
+            <table data-chart="bar" data-chart-animate>
+              <caption>Quarterly Revenue</caption>
+              <thead><tr><th>Quarter</th><th>Revenue</th><th>Profit</th></tr></thead>
+              <tbody>
+                <tr><td>Q1</td><td>420</td><td>180</td></tr>
+                <tr><td>Q2</td><td>580</td><td>240</td></tr>
+                <tr><td>Q3</td><td>510</td><td>210</td></tr>
+                <tr><td>Q4</td><td>690</td><td>310</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Line chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Line Chart</h3>
+            <code class="chart-tag">data-chart="line"</code>
+          </div>
+          <div class="chart-demo">
+            <table data-chart="line" data-chart-animate>
+              <caption>Monthly Users</caption>
+              <thead><tr><th>Month</th><th>Users</th></tr></thead>
+              <tbody>
+                <tr><td>Jan</td><td>1200</td></tr>
+                <tr><td>Feb</td><td>1800</td></tr>
+                <tr><td>Mar</td><td>1500</td></tr>
+                <tr><td>Apr</td><td>2200</td></tr>
+                <tr><td>May</td><td>2800</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pie chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Pie Chart</h3>
+            <code class="chart-tag">data-chart="pie"</code>
+          </div>
+          <div class="chart-demo">
+            <table data-chart="pie" data-chart-animate>
+              <caption>Browser Share</caption>
+              <thead><tr><th>Browser</th><th>Share</th></tr></thead>
+              <tbody>
+                <tr><td>Chrome</td><td>65</td></tr>
+                <tr><td>Safari</td><td>19</td></tr>
+                <tr><td>Firefox</td><td>10</td></tr>
+                <tr><td>Other</td><td>6</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Donut chart example -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-heading font-semibold">Donut Chart</h3>
+            <code class="chart-tag">data-chart="donut"</code>
+          </div>
+          <div class="chart-demo">
+            <table data-chart="donut" data-chart-animate>
+              <caption>Budget Allocation</caption>
+              <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+              <tbody>
+                <tr><td>Engineering</td><td>45</td></tr>
+                <tr><td>Marketing</td><td>25</td></tr>
+                <tr><td>Sales</td><td>20</td></tr>
+                <tr><td>Support</td><td>10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section class="py-20 px-4 sm:px-6 border-t border-border">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-heading font-bold text-center mb-4">
+        Three lines. That's it.
+      </h2>
+      <p class="text-center text-text-secondary mb-8">
+        No config files. No build step. No framework required.
+      </p>
+
+      <div class="bg-code-bg border border-border rounded-lg p-6 overflow-x-auto">
+        <pre class="text-sm leading-relaxed"><code><span class="text-text-muted">&lt;!-- 1. Add a data-chart attribute to any table --&gt;</span>
+&lt;<span class="text-accent">table</span> <span class="text-accent-readable">data-chart</span>=<span class="text-emerald-400">"bar"</span>&gt;
+  &lt;<span class="text-accent">thead</span>&gt;
+    &lt;<span class="text-accent">tr</span>&gt;&lt;<span class="text-accent">th</span>&gt;Month&lt;/<span class="text-accent">th</span>&gt;&lt;<span class="text-accent">th</span>&gt;Sales&lt;/<span class="text-accent">th</span>&gt;&lt;/<span class="text-accent">tr</span>&gt;
+  &lt;/<span class="text-accent">thead</span>&gt;
+  &lt;<span class="text-accent">tbody</span>&gt;
+    &lt;<span class="text-accent">tr</span>&gt;&lt;<span class="text-accent">td</span>&gt;Jan&lt;/<span class="text-accent">td</span>&gt;&lt;<span class="text-accent">td</span>&gt;120&lt;/<span class="text-accent">td</span>&gt;&lt;/<span class="text-accent">tr</span>&gt;
+    &lt;<span class="text-accent">tr</span>&gt;&lt;<span class="text-accent">td</span>&gt;Feb&lt;/<span class="text-accent">td</span>&gt;&lt;<span class="text-accent">td</span>&gt;150&lt;/<span class="text-accent">td</span>&gt;&lt;/<span class="text-accent">tr</span>&gt;
+  &lt;/<span class="text-accent">tbody</span>&gt;
+&lt;/<span class="text-accent">table</span>&gt;
+
+<span class="text-text-muted">&lt;!-- 2. Add the script --&gt;</span>
+&lt;<span class="text-accent">script</span> <span class="text-accent-readable">src</span>=<span class="text-emerald-400">"https://unpkg.com/data-chart"</span>&gt;&lt;/<span class="text-accent">script</span>&gt;
+
+<span class="text-text-muted">&lt;!-- 3. There is no step 3 --&gt;</span></code></pre>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}playground/`} class="text-accent-readable hover:text-[#e0f2fe] font-semibold text-lg">
+          Try it in the playground &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    import '../../../src/index.ts';
+  </script>
+</Layout>
+
+<style>
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #0284c7, #38bdf8);
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+    color: #fff;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text);
+  }
+
+  .chart-showcase-card {
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .chart-showcase-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.08);
+  }
+
+  .chart-preview {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 180px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chart-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-bg-surface);
+    color: var(--color-text-muted);
+    transition: color 0.2s, background 0.2s;
+  }
+  .chart-showcase-card:hover .chart-tag {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--color-accent-readable);
+  }
+</style>
+
+<script>
+  // Copy install command
+  document.getElementById('copy-install')?.addEventListener('click', async () => {
+    await navigator.clipboard.writeText('npm install data-chart');
+    const btn = document.getElementById('copy-install')!;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+    }, 2000);
+  });
+</script>

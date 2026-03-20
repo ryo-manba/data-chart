@@ -1,0 +1,104 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Attributes
+description: Complete reference for all data-chart HTML attributes.
+---
+
+# Attributes
+
+All configuration is done via HTML data attributes. No JavaScript config objects needed.
+
+## Required
+
+| Attribute | Values | Description |
+|-----------|--------|-------------|
+| `data-chart` | `bar` \| `line` \| `area` \| `pie` \| `donut` | Chart type (required) |
+
+## Layout
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-chart-height` | number | `220` | Chart height in px. Width follows parent. |
+| `data-chart-horizontal` | flag | — | Horizontal bar chart. `bar` only. |
+| `data-chart-stacked` | flag | — | Stacked bar chart. `bar` only. |
+
+## Styling
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-chart-colors` | comma-separated hex | auto palette | Custom series colors. e.g. `"#2d5be3,#1a8c5a"` |
+| `data-chart-grid` | `y` \| `x` \| `both` \| `none` | `y` | Grid line direction |
+| `data-chart-legend` | `top` \| `bottom` \| `none` | auto | Legend position. Auto: `top` if 2+ series, `none` if 1. |
+| `data-chart-radius` | number | `3` | Bar corner radius in px |
+
+## Animation
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-chart-animate` | flag | — | Enable entrance animations |
+| `data-chart-animate-duration` | number (ms) | `600` | Animation duration per element |
+| `data-chart-animate-stagger` | number (ms) | `60` | Delay between elements |
+
+## Behavior
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-chart-source` | flag | — | Show "Show table" toggle button |
+| `data-chart-debug` | flag | — | Log parsed data to console |
+
+## Examples
+
+### Minimal
+
+```html
+<table data-chart="bar">...</table>
+```
+
+### Full options
+
+```html
+<table
+  data-chart="bar"
+  data-chart-height="300"
+  data-chart-colors="#e05898,#4a90d9,#1a8c5a"
+  data-chart-grid="both"
+  data-chart-legend="bottom"
+  data-chart-radius="6"
+  data-chart-stacked
+  data-chart-animate
+  data-chart-animate-duration="800"
+  data-chart-animate-stagger="100"
+  data-chart-source
+>
+  ...
+</table>
+```
+
+## CSS Custom Properties
+
+data-chart injects a minimal stylesheet with one custom property:
+
+```css
+:root {
+  --dc-font-family: system-ui, -apple-system, sans-serif;
+}
+```
+
+Override it to change the font used in axis labels, legends, and toggle buttons.
+
+## CSS Classes
+
+| Class | Element | Description |
+|-------|---------|-------------|
+| `.data-chart-container` | `<div>` | Wrapper around table + SVG |
+| `.data-chart-svg` | `<svg>` | The chart SVG element |
+| `.data-chart-rendered` | `<table>` | Applied to converted tables |
+| `.data-chart-grid` | `<g>` | Grid lines group |
+| `.data-chart-axis` | `<g>` | Axis labels group |
+| `.data-chart-series` | `<g>` | Series data group |
+| `.data-chart-legend` | `<g>` | Legend group |
+| `.data-chart-bar` | `<rect>` | Individual bar |
+| `.data-chart-line` | `<path>` | Line path |
+| `.data-chart-area` | `<path>` | Area fill path |
+| `.data-chart-dot` | `<circle>` | Data point dot |
+| `.data-chart-slice` | `<path>` | Pie/donut slice |

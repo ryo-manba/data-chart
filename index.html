@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data-chart demo</title>
+  <script type="module" src="/src/index.ts"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    h2 { margin-top: 48px; }
+  </style>
+</head>
+<body>
+  <h1>data-chart demo</h1>
+
+  <h2>Bar Chart</h2>
+  <table data-chart="bar">
+    <caption>Monthly Sales</caption>
+    <thead><tr><th>Month</th><th>Product A</th><th>Product B</th></tr></thead>
+    <tbody>
+      <tr><td>Jan</td><td>120</td><td>80</td></tr>
+      <tr><td>Feb</td><td>200</td><td>150</td></tr>
+      <tr><td>Mar</td><td>150</td><td>120</td></tr>
+      <tr><td>Apr</td><td>180</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Horizontal Bar</h2>
+  <table data-chart="bar" data-chart-horizontal>
+    <thead><tr><th>Language</th><th>Users</th></tr></thead>
+    <tbody>
+      <tr><td>TypeScript</td><td>850</td></tr>
+      <tr><td>Python</td><td>720</td></tr>
+      <tr><td>Rust</td><td>340</td></tr>
+      <tr><td>Go</td><td>510</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Stacked Bar</h2>
+  <table data-chart="bar" data-chart-stacked>
+    <thead><tr><th>Q</th><th>Desktop</th><th>Mobile</th><th>Tablet</th></tr></thead>
+    <tbody>
+      <tr><td>Q1</td><td>300</td><td>200</td><td>50</td></tr>
+      <tr><td>Q2</td><td>280</td><td>250</td><td>60</td></tr>
+      <tr><td>Q3</td><td>260</td><td>300</td><td>70</td></tr>
+      <tr><td>Q4</td><td>320</td><td>350</td><td>80</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Line Chart</h2>
+  <table data-chart="line">
+    <thead><tr><th>Month</th><th>Revenue</th><th>Profit</th></tr></thead>
+    <tbody>
+      <tr><td>Jan</td><td>100</td><td>40</td></tr>
+      <tr><td>Feb</td><td>180</td><td>70</td></tr>
+      <tr><td>Mar</td><td>150</td><td>55</td></tr>
+      <tr><td>Apr</td><td>220</td><td>90</td></tr>
+      <tr><td>May</td><td>280</td><td>120</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Area Chart</h2>
+  <table data-chart="area">
+    <thead><tr><th>Week</th><th>Visitors</th></tr></thead>
+    <tbody>
+      <tr><td>W1</td><td>1200</td></tr>
+      <tr><td>W2</td><td>1800</td></tr>
+      <tr><td>W3</td><td>1500</td></tr>
+      <tr><td>W4</td><td>2200</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Pie Chart</h2>
+  <table data-chart="pie">
+    <thead><tr><th>Browser</th><th>Share</th></tr></thead>
+    <tbody>
+      <tr><td>Chrome</td><td>65</td></tr>
+      <tr><td>Safari</td><td>19</td></tr>
+      <tr><td>Firefox</td><td>10</td></tr>
+      <tr><td>Other</td><td>6</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Donut Chart</h2>
+  <table data-chart="donut">
+    <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+    <tbody>
+      <tr><td>Engineering</td><td>45</td></tr>
+      <tr><td>Marketing</td><td>25</td></tr>
+      <tr><td>Sales</td><td>20</td></tr>
+      <tr><td>Support</td><td>10</td></tr>
+    </tbody>
+  </table>
+
+  <h2>With Source Toggle</h2>
+  <table data-chart="bar" data-chart-source data-chart-colors="#e05898,#4a90d9">
+    <thead><tr><th>Item</th><th>Count</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>40</td><td>50</td></tr>
+      <tr><td>B</td><td>70</td><td>60</td></tr>
+      <tr><td>C</td><td>55</td><td>55</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

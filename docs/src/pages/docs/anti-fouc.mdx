@@ -1,0 +1,79 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Anti-FOUC
+description: Prevent flash of unstyled table content before chart rendering.
+---
+
+# Anti-FOUC
+
+FOUC (Flash of Unstyled Content) happens when the raw table is briefly visible before JavaScript converts it to a chart. data-chart uses a 3-layer defense.
+
+## Layer 1: Auto-injected CSS (default)
+
+data-chart injects a `<style>` tag on initialization that hides all `table[data-chart]` elements:
+
+```css
+table[data-chart] {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+```
+
+This works for most cases but has a brief window before JS executes.
+
+## Layer 2: Inline Style (recommended)
+
+Add this to your `<head>` for instant hiding:
+
+```html
+<head>
+  <style>
+    table[data-chart] {
+      visibility: hidden;
+      position: absolute;
+      width: 0; height: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+```
+
+## Layer 3: External CSS
+
+Import the provided CSS file:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/data-chart/css">
+```
+
+Or with a bundler:
+
+```js
+import 'data-chart/css';
+```
+
+## `<noscript>` Fallback
+
+For users with JavaScript disabled, restore table visibility:
+
+```html
+<noscript>
+  <style>
+    table[data-chart] {
+      visibility: visible;
+      position: static;
+      width: auto; height: auto;
+      overflow: visible;
+    }
+  </style>
+</noscript>
+```
+
+This ensures the table remains accessible as a data source even without the chart.
+
+## CLS Impact
+
+With Layer 2 applied, data-chart has zero CLS (Cumulative Layout Shift) impact because the table is hidden from the start and the chart is rendered in place.

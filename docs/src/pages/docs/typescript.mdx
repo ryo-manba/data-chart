@@ -1,0 +1,153 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: TypeScript
+description: Get full autocomplete for data-chart attributes in React and Vue.
+---
+
+# TypeScript
+
+data-chart ships with built-in type definitions. Import once and get autocomplete for all `data-chart-*` attributes — no extra config needed.
+
+## Setup
+
+```ts
+import 'data-chart';
+```
+
+That's it. This single import registers type augmentations for **React (JSX/TSX)** and **Vue** templates.
+
+## What You Get
+
+All `data-chart-*` attributes are fully typed with autocomplete:
+
+```tsx
+// React / TSX
+<table
+  data-chart="bar"                    // "bar" | "line" | "area" | "pie" | "donut"
+  data-chart-grid="y"                 // "y" | "x" | "both" | "none"
+  data-chart-legend="top"             // "top" | "bottom" | "none"
+  data-chart-height="300"
+  data-chart-radius="6"
+  data-chart-colors="#2d5be3,#1a8c5a"
+  data-chart-stacked
+  data-chart-animate
+  data-chart-animate-duration="800"
+  data-chart-animate-stagger="100"
+/>
+```
+
+## Exported Types
+
+You can import types directly for custom use cases:
+
+```ts
+import type {
+  DataChartType,        // "bar" | "line" | "area" | "pie" | "donut"
+  DataChartGrid,        // "y" | "x" | "both" | "none"
+  DataChartLegend,      // "top" | "bottom" | "none"
+  DataChartAttributes,  // All data-chart-* attributes as an interface
+} from 'data-chart';
+```
+
+## Exported Constants
+
+The source-of-truth arrays are also available:
+
+```ts
+import {
+  CHART_TYPES,       // ['bar', 'line', 'area', 'pie', 'donut']
+  GRID_OPTIONS,      // ['y', 'x', 'both', 'none']
+  LEGEND_POSITIONS,  // ['top', 'bottom', 'none']
+} from 'data-chart';
+```
+
+## Core Types
+
+```ts
+import type {
+  ParsedData,    // { headers, labels, datasets, caption? }
+  ChartConfig,   // Full chart configuration object
+  DataChartAPI,  // window.dataChart interface
+} from 'data-chart';
+```
+
+### ParsedData
+
+```ts
+interface ParsedData {
+  headers: string[];      // Series names from <thead>
+  labels: string[];       // Category labels from first <td> column
+  datasets: number[][];   // datasets[seriesIndex][rowIndex]
+  caption?: string;       // <caption> text if present
+}
+```
+
+### DataChartAPI
+
+```ts
+interface DataChartAPI {
+  init(): void;
+  render(table: HTMLTableElement): SVGSVGElement;
+  refresh(table: HTMLTableElement): SVGSVGElement;
+  destroy(table?: HTMLTableElement): void;
+  version: string;
+}
+```
+
+## Framework Examples
+
+### React
+
+```tsx
+function Chart() {
+  return (
+    <table data-chart="line" data-chart-animate>
+      <thead>
+        <tr><th>Month</th><th>Users</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jan</td><td>1200</td></tr>
+        <tr><td>Feb</td><td>1800</td></tr>
+      </tbody>
+    </table>
+  );
+}
+```
+
+### Vue
+
+```vue
+<template>
+  <table data-chart="bar" data-chart-stacked data-chart-animate>
+    <thead>
+      <tr><th>Q</th><th>Desktop</th><th>Mobile</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Q1</td><td>300</td><td>200</td></tr>
+      <tr><td>Q2</td><td>280</td><td>250</td></tr>
+    </tbody>
+  </table>
+</template>
+
+<script setup lang="ts">
+import 'data-chart';
+</script>
+```
+
+### Svelte
+
+```svelte
+<script lang="ts">
+  import 'data-chart';
+</script>
+
+<table data-chart="area" data-chart-animate>
+  <thead>
+    <tr><th>Week</th><th>Visitors</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>W1</td><td>3200</td></tr>
+    <tr><td>W2</td><td>4100</td></tr>
+  </tbody>
+</table>
+```
